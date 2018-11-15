@@ -52,8 +52,10 @@ function run() {
                 roundNumber: 0,
                 winner: ''
             };
+            console.log(actual);
+            console.log(expected);
             (0, _mocha.it)('should emit game start', function () {
-                (0, _chai.expect)(actual).to.equal(expected);
+                (0, _chai.expect)(JSON.stringify(actual)).to.equal(JSON.stringify(expected));
             });
         });
     });

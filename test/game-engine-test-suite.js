@@ -29,7 +29,7 @@ export function run() {
         });
         */
 
-        describe('called with correct', () => {
+        describe('called with correct playernames', () => {
             
             sut.startGame('Johan', 'lisa');
             let actual = sut.getGame();
@@ -38,8 +38,8 @@ export function run() {
                 roundNumber: 0,
                 winner: ''
             }
-            it('should emit game start', () => {
-                expect(actual).to.equal(expected);
+            it('should return matching game object', () => {
+                expect(JSON.stringify(actual)).to.equal(JSON.stringify(expected));
             });
         });
 

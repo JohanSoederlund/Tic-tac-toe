@@ -9,7 +9,10 @@ const gameBoard = [
 export default class GameEngine {
 
 	constructor() {
-       this.initGameBoard(); 
+       this.initGameBoard();
+       this.roundNumber = 0;
+       this.winner = '';
+       this.players = [];
     }
 
     get gameBoard() {
@@ -28,12 +31,17 @@ export default class GameEngine {
 
     }
 
-    startGame() {
-
+    startGame(playerName1, playerName2) {
+        this.players[0] = playerName1;
+        this.players[1] = playerName2;
     }
 
     getGame() {
-        
+        return { 
+            players: this.players,
+            roundNumber: this.roundNumber,
+            winner: this.winner
+        }
     }
 
     endGame() {

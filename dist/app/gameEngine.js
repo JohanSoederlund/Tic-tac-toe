@@ -15,6 +15,9 @@ var GameEngine = function () {
         _classCallCheck(this, GameEngine);
 
         this.initGameBoard();
+        this.roundNumber = 0;
+        this.winner = '';
+        this.players = [];
     }
 
     _createClass(GameEngine, [{
@@ -28,10 +31,19 @@ var GameEngine = function () {
         value: function calculateThreeInARow() {}
     }, {
         key: "startGame",
-        value: function startGame() {}
+        value: function startGame(playerName1, playerName2) {
+            this.players[0] = playerName1;
+            this.players[1] = playerName2;
+        }
     }, {
         key: "getGame",
-        value: function getGame() {}
+        value: function getGame() {
+            return {
+                players: this.players,
+                roundNumber: this.roundNumber,
+                winner: this.winner
+            };
+        }
     }, {
         key: "endGame",
         value: function endGame() {}
