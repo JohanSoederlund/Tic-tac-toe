@@ -1,27 +1,25 @@
 
 
-const gameBoard = [
-    [" ", " ", " "],
-    [" ", " ", " "],
-    [" ", " ", " "]
-]
-import Player from './player';
 
 export default class GameEngine {
 
 	constructor() {
-       this.initGameBoard();
-       this.roundNumber = 0;
-       this.winner = '';
-       this.players = [];
+        this.roundNumber = 0;
+        this.winner = '';
+        this.players = [];
+        this._gameBoard = [
+            [" ", " ", " "],
+            [" ", " ", " "],
+            [" ", " ", " "]
+        ];
+    }
+
+    set gameBoard(gameBoard) {
+        this._gameBoard = gameBoard;
     }
 
     get gameBoard() {
         return;
-    }
-
-    initGameBoard() {
-
     }
 
     placeGamePiece(gamePiece, placement) {
@@ -51,5 +49,3 @@ export default class GameEngine {
     }
 
 }
-
-module.exports

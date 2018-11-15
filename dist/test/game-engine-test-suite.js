@@ -35,7 +35,7 @@ var sut = new _gameEngine2.default(); /**
 // Requires
 
 function run() {
-    (0, _mocha.describe)('start game', function () {
+    (0, _mocha.describe)('startGame', function () {
 
         /*
         before(() => {
@@ -49,11 +49,6 @@ function run() {
         */
 
         (0, _mocha.describe)('called with correct playernames', function () {
-            //const spy1 = sinon.spy(player, 'Johan');
-            //const spy2 = sinon.spy(player, 'Lisa');
-            //sut.startGame('Johan', 'lisa');
-            //sut.startGame(spy1, spy2);
-
             var player1 = sinon.mock(_player2.default);
             var player2 = sinon.mock(_player2.default);
             sut.startGame(player1, player2);
@@ -64,11 +59,57 @@ function run() {
                 roundNumber: 0,
                 winner: ''
             };
-            console.log(actual);
-            console.log(expected);
             (0, _mocha.it)('should return matching game object', function () {
-                //expect(spy.called).to.equal(true);
                 (0, _chai.expect)(JSON.stringify(actual)).to.equal(JSON.stringify(expected));
+            });
+
+            player1.restore();
+            player2.restore();
+        });
+    });
+
+    (0, _mocha.describe)('get gameBoard', function () {
+
+        (0, _mocha.describe)('get empty gameBoard', function () {
+            var expected = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]];
+            (0, _mocha.it)('should return matching game object', function () {
+                (0, _chai.expect)(JSON.stringify(sut.gameBoard)).to.equal(JSON.stringify(expected));
+            });
+        });
+    });
+
+    (0, _mocha.describe)('placeGamePiece', function () {
+
+        (0, _mocha.describe)('place gamePiece at correct unoccupied gameSquare', function () {
+            var expected = [["X", " ", " "], [" ", " ", " "], [" ", " ", " "]];
+            var player1 = sinon.mock(_player2.default);
+            sut.placeGamePiece(player1, [0, 0]);
+            var actual = sut.gameBoard;
+            (0, _mocha.it)('should update gameBoard with X on position [0,0]', function () {
+                (0, _chai.expect)(JSON.stringify(actual)).to.equal(JSON.stringify(expected));
+            });
+        });
+    });
+
+    (0, _mocha.describe)('calculateThreeInARow', function () {
+
+        (0, _mocha.describe)('calculates if three in a row is accomplished', function () {
+            (0, _mocha.it)('should return false', function () {
+                (0, _chai.expect)(sut.calculateThreeInARow).to.be.false;
+            });
+        });
+    });
+
+    (0, _mocha.describe)('endGame', function () {
+
+        (0, _mocha.describe)('end game in progress', function () {
+            var expected = {
+                players: [],
+                roundNumber: 0,
+                winner: ''
+            };
+            (0, _mocha.it)('should return current status for game then end it', function () {
+                (0, _chai.expect)(JSON.stringify(sut.endGame)).to.equal(JSON.stringify(expected));
             });
         });
     });
