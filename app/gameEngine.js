@@ -5,6 +5,7 @@ const gameBoard = [
     [" ", " ", " "],
     [" ", " ", " "]
 ]
+import Player from './player';
 
 export default class GameEngine {
 
@@ -31,9 +32,10 @@ export default class GameEngine {
 
     }
 
-    startGame(playerName1, playerName2) {
-        this.players[0] = playerName1;
-        this.players[1] = playerName2;
+    startGame(player1, player2) {
+        //check player1 is of type Player
+        this.players[0] = player1;
+        this.players[1] = player2;
     }
 
     getGame() {
