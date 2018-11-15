@@ -12,7 +12,7 @@ import * as sinon from 'sinon';
 
 import GameEngine from './../app/gameEngine';
 import Player from '../app/player.js';
-const sut = new GameEngine();
+let sut = new GameEngine();
 
 
 export function run() {
@@ -24,13 +24,14 @@ export function run() {
 				
 			});
         });
-
+        */
         after(() => {
 			return new Promise((resolve) => {
-				
+                sut = new GameEngine();
+                resolve();
 			});
         });
-        */
+        
 
         describe('called with correct playernames', () => {
             let player1 = sinon.mock(Player);
@@ -49,6 +50,7 @@ export function run() {
 
             player1.restore();
             player2.restore();
+            sut = new GameEngine();
         });
 
 
@@ -72,26 +74,34 @@ export function run() {
     describe('placeGamePiece', () => {
 
         describe('place gamePiece at correct unoccupied gameSquare', () => {
-            const expected = [
-                ["X", " ", " "],
-                [" ", " ", " "],
-                [" ", " ", " "]
-            ]
-            let player1 = sinon.mock(Player);
-            sut.placeGamePiece(player1, [0,0]);
-            let actual = sut.gameBoard;
-            it('should update gameBoard with X on position [0,0]', () => {
-                expect(JSON.stringify(actual)).to.equal(JSON.stringify(expected));
+            
+            before((done) => {
+                let player1 = sinon.mock(Player);
+                player1._gamePiece = 'X';
+                let placement = [0, 0];
+                sut.placeGamePiece(player1, [0, 0]);     
+                done();
+            });
+            
+            it('should update gameBoard with X on position [0][0]', (done) => {
+                const expected = [
+                    ["X", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]
+                ]
+                expect(JSON.stringify(sut.gameBoard)).to.equal(JSON.stringify(expected));
+                done();
             });
         });
 
     });
 
+    
     describe('calculateThreeInARow', () => {
 
         describe('calculates if three in a row is accomplished', () => {
             it('should return false', () => {
-                expect(sut.calculateThreeInARow).to.be.false;
+                expect(sut.calculateThreeInARow()).to.be.false;
             });
         });
 
@@ -106,7 +116,7 @@ export function run() {
                 winner: ''
             }
             it('should return current status for game then end it', () => {
-                expect(JSON.stringify(sut.endGame)).to.equal(JSON.stringify(expected));
+                expect(JSON.stringify(sut.endGame())).to.equal(JSON.stringify(expected));
             });
         });
 

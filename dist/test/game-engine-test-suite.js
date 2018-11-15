@@ -42,11 +42,13 @@ function run() {
         return new Promise((resolve) => {
         });
         });
-         after(() => {
-        return new Promise((resolve) => {
-        });
-        });
         */
+        (0, _mocha.after)(function () {
+            return new Promise(function (resolve) {
+                sut = new _gameEngine2.default();
+                resolve();
+            });
+        });
 
         (0, _mocha.describe)('called with correct playernames', function () {
             var player1 = sinon.mock(_player2.default);
@@ -65,6 +67,7 @@ function run() {
 
             player1.restore();
             player2.restore();
+            sut = new _gameEngine2.default();
         });
     });
 
@@ -81,12 +84,19 @@ function run() {
     (0, _mocha.describe)('placeGamePiece', function () {
 
         (0, _mocha.describe)('place gamePiece at correct unoccupied gameSquare', function () {
-            var expected = [["X", " ", " "], [" ", " ", " "], [" ", " ", " "]];
-            var player1 = sinon.mock(_player2.default);
-            sut.placeGamePiece(player1, [0, 0]);
-            var actual = sut.gameBoard;
-            (0, _mocha.it)('should update gameBoard with X on position [0,0]', function () {
-                (0, _chai.expect)(JSON.stringify(actual)).to.equal(JSON.stringify(expected));
+
+            (0, _mocha.before)(function (done) {
+                var player1 = sinon.mock(_player2.default);
+                player1._gamePiece = 'X';
+                var placement = [0, 0];
+                sut.placeGamePiece(player1, [0, 0]);
+                done();
+            });
+
+            (0, _mocha.it)('should update gameBoard with X on position [0][0]', function (done) {
+                var expected = [["X", " ", " "], [" ", " ", " "], [" ", " ", " "]];
+                (0, _chai.expect)(JSON.stringify(sut.gameBoard)).to.equal(JSON.stringify(expected));
+                done();
             });
         });
     });
@@ -95,7 +105,7 @@ function run() {
 
         (0, _mocha.describe)('calculates if three in a row is accomplished', function () {
             (0, _mocha.it)('should return false', function () {
-                (0, _chai.expect)(sut.calculateThreeInARow).to.be.false;
+                (0, _chai.expect)(sut.calculateThreeInARow()).to.be.false;
             });
         });
     });
@@ -109,7 +119,7 @@ function run() {
                 winner: ''
             };
             (0, _mocha.it)('should return current status for game then end it', function () {
-                (0, _chai.expect)(JSON.stringify(sut.endGame)).to.equal(JSON.stringify(expected));
+                (0, _chai.expect)(JSON.stringify(sut.endGame())).to.equal(JSON.stringify(expected));
             });
         });
     });

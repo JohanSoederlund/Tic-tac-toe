@@ -2,8 +2,9 @@
 
 
 export default class Player {
-	constructor(name) {
-		this.name = name;
+	constructor(name, gamePiece) {
+        this._name = name;
+        this._gamePice = gamePiece;
 	}
 
 

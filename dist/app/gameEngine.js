@@ -13,17 +13,44 @@ var GameEngine = function () {
         _classCallCheck(this, GameEngine);
 
         this.roundNumber = 0;
-        this.winner = '';
+        this.winner = "";
         this.players = [];
         this._gameBoard = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]];
     }
 
     _createClass(GameEngine, [{
         key: "placeGamePiece",
-        value: function placeGamePiece(gamePiece, placement) {}
+        value: function placeGamePiece(player, placement) {
+            console.log("A" + this._gameBoard[placement[0]][placement[1]] + "A");
+            console.log(player._gamePiece);
+            if (this._gameBoard[placement[0]][placement[1]] === " ") {
+                this._gameBoard[placement[0]][placement[1]] = player._gamePiece;
+                if (player._gamePiece === "O") {
+                    this.roundNumber++;
+                }
+            }
+        }
     }, {
         key: "calculateThreeInARow",
-        value: function calculateThreeInARow() {}
+        value: function calculateThreeInARow() {
+            this._gameBoard.forEach(function (row) {
+                if (row[0] !== " " && row[0] === row[1] === row[2]) {
+                    return true;
+                }
+            });
+            if (this._gameBoard[0][0] !== " ") {
+                if (this._gameBoard[0][0] === this._gameBoard[1][0] === this._gameBoard[2][0]) return true;
+                if (this._gameBoard[0][0] === this._gameBoard[1][1] === this._gameBoard[2][2]) return true;
+            }
+            if (this._gameBoard[0][1] !== " ") {
+                if (this._gameBoard[0][1] === this._gameBoard[1][1] === this._gameBoard[2][1]) return true;
+            }
+            if (this._gameBoard[0][2] !== " ") {
+                if (this._gameBoard[0][2] === this._gameBoard[1][2] === this._gameBoard[2][2]) return true;
+                if (this._gameBoard[0][2] === this._gameBoard[1][1] === this._gameBoard[2][0]) return true;
+            }
+            return false;
+        }
     }, {
         key: "startGame",
         value: function startGame(player1, player2) {
@@ -42,14 +69,24 @@ var GameEngine = function () {
         }
     }, {
         key: "endGame",
-        value: function endGame() {}
+        value: function endGame() {
+            var game = {
+                players: this.players,
+                roundNumber: this.roundNumber,
+                winner: this.winner
+            };
+            this.players = [];
+            this.roundNumber = 0;
+            this.winner = "";
+            return game;
+        }
     }, {
         key: "gameBoard",
         set: function set(gameBoard) {
             this._gameBoard = gameBoard;
         },
         get: function get() {
-            return;
+            return this._gameBoard;
         }
     }]);
 

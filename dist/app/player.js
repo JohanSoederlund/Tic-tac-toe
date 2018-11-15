@@ -1,15 +1,16 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+       value: true
 });
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Player = function Player(name) {
-	_classCallCheck(this, Player);
+var Player = function Player(name, gamePiece) {
+       _classCallCheck(this, Player);
 
-	this.name = name;
+       this._name = name;
+       this._gamePice = gamePiece;
 };
 
 exports.default = Player;
