@@ -21,21 +21,27 @@ export default class Player {
     }
 
     set name(name) {
-        this._name = name;
+        if (typeof(winner) === "string" && 10 <= gamePiece.length <= 1){
+            this._name = name;
+        } else {
+            throw new TypeError("name must be between one and 10 characters long");
+        }
     }
 
     set gamePiece(gamePiece) {
-        this._gamePice = gamePiece;
+        if (typeof(winner) === "string" && gamePiece.length === 1){
+            this._gamePice = gamePiece;
+        } else {
+            throw new TypeError("gamePiece must be one character long");
+        }
     }
 
     setIsWinner(winner) {
         if (typeof(winner) === "boolean"){
             this._isWinner = winner;
         } else {
-            //throw new Error();
             throw new TypeError("winner must be of boolean type");
         }
-            
     }
 
 }
