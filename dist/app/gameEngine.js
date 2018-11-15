@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21,8 +23,11 @@ var GameEngine = function () {
     _createClass(GameEngine, [{
         key: "placeGamePiece",
         value: function placeGamePiece(player, placement) {
-            console.log("A" + this._gameBoard[placement[0]][placement[1]] + "A");
-            console.log(player._gamePiece);
+            if ((typeof player === "undefined" ? "undefined" : _typeof(player)) !== "object" || placement.isArray === false) {
+                throw new TypeError("player and placement must be of valid type");
+            } else if (0 > placement[0] > 2 || 0 > placement[1] > 2) {
+                throw new RangeError("Placement must be in range [0, 0] to [2, 2]");
+            }
             if (this._gameBoard[placement[0]][placement[1]] === " ") {
                 this._gameBoard[placement[0]][placement[1]] = player._gamePiece;
                 if (player._gamePiece === "O") {
@@ -54,7 +59,9 @@ var GameEngine = function () {
     }, {
         key: "startGame",
         value: function startGame(player1, player2) {
-            //check player1 is of type Player
+            if ((typeof player1 === "undefined" ? "undefined" : _typeof(player1)) !== "object" || (typeof player2 === "undefined" ? "undefined" : _typeof(player2)) !== "object") {
+                throw new TypeError("players must be of valid type");
+            }
             this.players[0] = player1;
             this.players[1] = player2;
         }
@@ -83,7 +90,11 @@ var GameEngine = function () {
     }, {
         key: "gameBoard",
         set: function set(gameBoard) {
-            this._gameBoard = gameBoard;
+            if (gameBoard.isArray && gameBoard[0].isArray) {
+                this._gameBoard = gameBoard;
+            } else {
+                throw new TypeError("gameBoard must be of valid type");
+            }
         },
         get: function get() {
             return this._gameBoard;

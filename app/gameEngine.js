@@ -15,7 +15,11 @@ export default class GameEngine {
     }
 
     set gameBoard(gameBoard) {
-        this._gameBoard = gameBoard;
+        if (gameBoard.isArray && gameBoard[0].isArray) {
+            this._gameBoard = gameBoard;
+        } else {
+            throw new TypeError("gameBoard must be of valid type");
+        }
     }
 
     get gameBoard() {
@@ -23,8 +27,11 @@ export default class GameEngine {
     }
 
     placeGamePiece(player, placement) {
-        console.log("A" + this._gameBoard[placement[0]][placement[1]] + "A");
-        console.log( player._gamePiece);
+        if (typeof(player) !== "object" || placement.isArray === false) {
+            throw new TypeError("player and placement must be of valid type");
+        } else if(0 > placement[0] > 2 || 0 > placement[1] > 2 ) {
+            throw new RangeError("Placement must be in range [0, 0] to [2, 2]");
+        }
         if (this._gameBoard[placement[0]][placement[1]] === " ") {
             this._gameBoard[placement[0]][placement[1]] = player._gamePiece;
             if (player._gamePiece === "O") {
@@ -54,7 +61,9 @@ export default class GameEngine {
     }
 
     startGame(player1, player2) {
-        //check player1 is of type Player
+        if (typeof(player1) !== "object" || typeof(player2) !== "object") {
+            throw new TypeError("players must be of valid type");
+        } 
         this.players[0] = player1;
         this.players[1] = player2;
     }
