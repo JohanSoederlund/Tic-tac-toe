@@ -14,27 +14,39 @@ var Player = function () {
 
         this._name = name;
         this._gamePice = gamePiece;
+        this._isWinner = false;
     }
 
     _createClass(Player, [{
-        key: "setWinner",
-        value: function setWinner(winner) {}
+        key: "setIsWinner",
+        value: function setIsWinner(winner) {
+            if (typeof winner === "boolean") {
+                this._isWinner = winner;
+            } else {
+                //throw new Error();
+                throw new TypeError("winner must be of boolean type");
+            }
+        }
     }, {
         key: "name",
         get: function get() {
             return this._name;
         },
-        set: function set(name) {}
+        set: function set(name) {
+            this._name = name;
+        }
     }, {
         key: "gamePiece",
         get: function get() {
             return this._gamePice;
         },
-        set: function set(gamePiece) {}
+        set: function set(gamePiece) {
+            this._gamePice = gamePiece;
+        }
     }, {
         key: "isWinner",
         get: function get() {
-            return;
+            return this._isWinner;
         }
     }]);
 

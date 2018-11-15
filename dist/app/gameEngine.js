@@ -17,6 +17,7 @@ var GameEngine = function () {
         this.roundNumber = 0;
         this.winner = "";
         this.players = [];
+        //call setter instead
         this._gameBoard = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]];
     }
 

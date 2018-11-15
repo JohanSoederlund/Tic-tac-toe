@@ -15,31 +15,32 @@ export function run() {
 	describe('isWinner', () => {
 
         describe('called before set', () => {
-            //imports from mocha
             it('should return false', () => {
-                expect(JSON.stringify(sut.isWinner)).to.be.false;
+                expect(sut.isWinner).to.be.false;
             });
-
         });
 
         describe('called after set to true', () => {
-            
-            sut.setWinner(true);
-
-            it('should return true', () => {
-                expect(JSON.stringify(sut.isWinner)).to.be.true;
+            before((done) => {
+                sut.setIsWinner(true);
+                done();
             });
 
+            after((done) => {
+                sut.setIsWinner(false);
+                done();
+            });
+
+            it('should return true', () => {
+                expect(sut.isWinner).to.be.true;
+            });
         });
 
         describe('called after set to null', () => {
-            
-            sut.setWinner(null);
-
-            it('should return false', () => {
-                expect(JSON.stringify(sut.isWinner)).to.be.false;
+            it('should throw TypeError winner must be of boolean type', () => {
+                expect(() => sut.setIsWinner(null)).to.throw(TypeError);
+                expect(sut.isWinner).to.be.false;
             });
-
         });
 
     });

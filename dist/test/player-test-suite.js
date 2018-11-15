@@ -33,27 +33,33 @@ function run() {
     (0, _mocha.describe)('isWinner', function () {
 
         (0, _mocha.describe)('called before set', function () {
-            //imports from mocha
             (0, _mocha.it)('should return false', function () {
-                (0, _chai.expect)(JSON.stringify(sut.isWinner)).to.be.false;
+                (0, _chai.expect)(sut.isWinner).to.be.false;
             });
         });
 
         (0, _mocha.describe)('called after set to true', function () {
+            (0, _mocha.before)(function (done) {
+                sut.setIsWinner(true);
+                done();
+            });
 
-            sut.setWinner(true);
+            (0, _mocha.after)(function (done) {
+                sut.setIsWinner(false);
+                done();
+            });
 
             (0, _mocha.it)('should return true', function () {
-                (0, _chai.expect)(JSON.stringify(sut.isWinner)).to.be.true;
+                (0, _chai.expect)(sut.isWinner).to.be.true;
             });
         });
 
         (0, _mocha.describe)('called after set to null', function () {
-
-            sut.setWinner(null);
-
-            (0, _mocha.it)('should return false', function () {
-                (0, _chai.expect)(JSON.stringify(sut.isWinner)).to.be.false;
+            (0, _mocha.it)('should throw TypeError winner must be of boolean type', function () {
+                (0, _chai.expect)(function () {
+                    return sut.setIsWinner(null);
+                }).to.throw(TypeError);
+                (0, _chai.expect)(sut.isWinner).to.be.false;
             });
         });
     });
