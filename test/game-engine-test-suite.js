@@ -7,8 +7,6 @@
 import { expect } from 'chai';
 import { it, describe, before, after } from 'mocha';
 import * as sinon from 'sinon';
-//var sinon = require('sinon');
-//import sinon from './node_modules/sinon/pkg/sinon-esm.js';
 
 import GameEngine from './../app/gameEngine';
 import Player from '../app/player.js';

@@ -13,12 +13,14 @@ describe('Testrunner', () => {
 */
 
 // Suites
-var gameEngineTests = require('./game-engine-test-suite');
-
-// Runs
-/**
- * Runs all test-suites.
- */
+var gameEngineTests = require('./game-engine-test-suite'); /**
+                                                            * Runs all test-suites.
+                                                            */
 
 // Variables
-gameEngineTests.run();
+
+var playerTests = require('./player-test-suite');
+
+// Runs
+//gameEngineTests.run();
+playerTests.run();
