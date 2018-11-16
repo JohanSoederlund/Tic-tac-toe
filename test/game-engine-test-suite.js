@@ -16,20 +16,12 @@ let sut = new GameEngine();
 export function run() {
 	describe('startGame', () => {
 
-        /*
-        before(() => {
-			return new Promise((resolve) => {
-				
-			});
-        });
-        */
         after(() => {
 			return new Promise((resolve) => {
                 sut = new GameEngine();
                 resolve();
 			});
         });
-        
 
         describe('called with correct playernames', () => {
             let player1 = sinon.mock(Player);
@@ -51,6 +43,20 @@ export function run() {
             sut = new GameEngine();
         });
 
+        describe('called with incorrect playernames', () => {
+            let player1 = sinon.mock(Player);
+            let player2 = sinon.mock(Player);
+            player1.name = "";
+            player2.name = "ANameThatIsMuchToLongName"
+
+            it('should return matching game object', () => {
+                expect(() => sut.startGame(player1, player2)).to.throw(RangeError);
+            });
+
+            player1.restore();
+            player2.restore();
+            sut = new GameEngine();
+        });
 
     });
 
@@ -67,6 +73,28 @@ export function run() {
             });
         });
 
+        describe('get gameBoard after one incorrect gamePiece', () => {
+            before((done) => {
+                let player1 = sinon.mock(Player);
+                player1._gamePiece = 'X';
+                let placement = [0, 0];
+                sut.placeGamePiece(player1, [0, 0]);
+                player1._gamePiece = 'Y';
+                sut.placeGamePiece(player1, [0, 1]);
+                done();
+            });
+            
+            const expected = [
+                ["X", " ", " "],
+                [" ", " ", " "],
+                [" ", " ", " "]
+            ]
+            it('should return matching game object', () => {
+                expect(JSON.stringify(sut.gameBoard)).to.equal(JSON.stringify(expected));
+            });
+
+            sut = new GameEngine();
+        });
     });
 
     describe('placeGamePiece', () => {
@@ -90,6 +118,30 @@ export function run() {
                 expect(JSON.stringify(sut.gameBoard)).to.equal(JSON.stringify(expected));
                 done();
             });
+            sut = new GameEngine();
+        });
+
+        describe('place gamePiece at incorrect gameSquare', () => {
+            
+            before((done) => {
+                let player1 = sinon.mock(Player);
+                player1._gamePiece = 'X';
+                let placement = [0, 0];
+                sut.placeGamePiece(player1, [0, 0]);     
+                done();
+            });
+            
+            it('should not update gameBoard, but throw error', (done) => {
+                const expected = [
+                    [" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]
+                ]
+                expect(JSON.stringify(sut.gameBoard)).to.equal(JSON.stringify(expected));
+                expect(() => sut.startGame(player1, player2)).to.throw(RangeError);
+                done();
+            });
+            sut = new GameEngine();
         });
 
     });
@@ -103,6 +155,23 @@ export function run() {
             });
         });
 
+        describe('calculates if three in a row is accomplished', () => {
+
+            before((done) => {
+                let player1 = sinon.mock(Player);
+                player1._gamePiece = 'X';
+                sut.placeGamePiece(player1, [0, 0]);
+                sut.placeGamePiece(player1, [0, 1]);  
+                sut.placeGamePiece(player1, [0, 2]);
+                done();
+            });
+
+            it('should return true', () => {
+                expect(sut.calculateThreeInARow()).to.be.true;
+            });
+            sut = new GameEngine();
+        });
+
     });
 
     describe('endGame', () => {
@@ -112,6 +181,28 @@ export function run() {
                 players: [],
                 roundNumber: 0,
                 winner: ''
+            }
+            it('should return current status for game then end it', () => {
+                expect(JSON.stringify(sut.endGame())).to.equal(JSON.stringify(expected));
+            });
+        });
+
+        describe('end game in progress', () => {
+            let player1;
+            before((done) => {
+                player1 = sinon.mock(Player);
+                player1._gamePiece = 'X';
+                player1._name = 'Carl';
+                sut.placeGamePiece(player1, [0, 0]);
+                sut.placeGamePiece(player1, [0, 1]);  
+                sut.placeGamePiece(player1, [0, 2]);
+                done();
+            });
+
+            let expected = {
+                players: [player1],
+                roundNumber: 0,
+                winner: 'Carl'
             }
             it('should return current status for game then end it', () => {
                 expect(JSON.stringify(sut.endGame())).to.equal(JSON.stringify(expected));

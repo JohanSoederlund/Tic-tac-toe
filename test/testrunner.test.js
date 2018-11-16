@@ -18,7 +18,9 @@ describe('Testrunner', () => {
 // Suites
 var gameEngineTests = require('./game-engine-test-suite');
 var playerTests = require('./player-test-suite');
+var appTests = require('./app-test-suite');
 
 // Runs
 gameEngineTests.run();
-playerTests.run();
+//playerTests.run();
+//appTests.run();
