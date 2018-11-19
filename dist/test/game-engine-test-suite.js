@@ -32,20 +32,17 @@ var sut = new _gameEngine2.default(); /**
 // Requires
 
 function run() {
+    var player1 = sinon.mock(_player2.default);
+    var player2 = sinon.mock(_player2.default);
+    player1._name = 'Michael';
+    player2._name = 'Michelle';
+    player1._gamePiece = 'X';
+    player2._gamePiece = 'O';
+
     (0, _mocha.describe)('startGame', function () {
 
-        (0, _mocha.after)(function () {
-            return new Promise(function (resolve) {
-                sut = new _gameEngine2.default();
-                resolve();
-            });
-        });
-
         (0, _mocha.describe)('called with correct playernames', function () {
-            var player1 = sinon.mock(_player2.default);
-            var player2 = sinon.mock(_player2.default);
             sut.startGame(player1, player2);
-
             var actual = sut.getGame();
             var expected = {
                 players: [player1, player2],
@@ -55,27 +52,18 @@ function run() {
             (0, _mocha.it)('should return matching game object', function () {
                 (0, _chai.expect)(JSON.stringify(actual)).to.equal(JSON.stringify(expected));
             });
-
-            player1.restore();
-            player2.restore();
-            sut = new _gameEngine2.default();
         });
 
         (0, _mocha.describe)('called with incorrect playernames', function () {
-            var player1 = sinon.mock(_player2.default);
-            var player2 = sinon.mock(_player2.default);
-            player1.name = "";
-            player2.name = "ANameThatIsMuchToLongName";
-
-            (0, _mocha.it)('should return matching game object', function () {
+            (0, _mocha.it)('should throw Error', function () {
+                player1._name = "";
+                player2._name = "ANameThatIsMuchToLongName";
                 (0, _chai.expect)(function () {
                     return sut.startGame(player1, player2);
-                }).to.throw(RangeError);
+                }).to.throw(Error);
+                player1._name = 'Michael';
+                player2._name = 'Michelle';
             });
-
-            player1.restore();
-            player2.restore();
-            sut = new _gameEngine2.default();
         });
     });
 
@@ -90,21 +78,21 @@ function run() {
 
         (0, _mocha.describe)('get gameBoard after one incorrect gamePiece', function () {
             (0, _mocha.before)(function (done) {
-                var player1 = sinon.mock(_player2.default);
-                player1._gamePiece = 'X';
-                var placement = [0, 0];
+                sut.startGame(player1, player2);
                 sut.placeGamePiece(player1, [0, 0]);
-                player1._gamePiece = 'Y';
-                sut.placeGamePiece(player1, [0, 1]);
+                var player3 = sinon.mock(_player2.default);
+                player3._name = 'Michael';
+                player3._gamePiece = 'Y';
+                sut.placeGamePiece(player3, [0, 1]);
                 done();
             });
 
             var expected = [["X", " ", " "], [" ", " ", " "], [" ", " ", " "]];
+
             (0, _mocha.it)('should return matching game object', function () {
                 (0, _chai.expect)(JSON.stringify(sut.gameBoard)).to.equal(JSON.stringify(expected));
+                sut = new _gameEngine2.default();
             });
-
-            sut = new _gameEngine2.default();
         });
     });
 
@@ -113,56 +101,62 @@ function run() {
         (0, _mocha.describe)('place gamePiece at correct unoccupied gameSquare', function () {
 
             (0, _mocha.before)(function (done) {
-                var player1 = sinon.mock(_player2.default);
-                player1._gamePiece = 'X';
-                var placement = [0, 0];
-                sut.placeGamePiece(player1, [0, 0]);
+                sut.startGame(player1, player2);
+                sut.placeGamePiece(player2, [2, 2]);
                 done();
             });
 
             (0, _mocha.it)('should update gameBoard with X on position [0][0]', function (done) {
-                var expected = [["X", " ", " "], [" ", " ", " "], [" ", " ", " "]];
+                var expected = [[" ", " ", " "], [" ", " ", " "], [" ", " ", "O"]];
                 (0, _chai.expect)(JSON.stringify(sut.gameBoard)).to.equal(JSON.stringify(expected));
                 done();
             });
-            sut = new _gameEngine2.default();
         });
 
         (0, _mocha.describe)('place gamePiece at incorrect gameSquare', function () {
 
             (0, _mocha.before)(function (done) {
-                var player1 = sinon.mock(_player2.default);
-                player1._gamePiece = 'X';
-                var placement = [0, 0];
-                sut.placeGamePiece(player1, [0, 0]);
+                sut.placeGamePiece(player1, [2, 2]);
                 done();
             });
 
-            (0, _mocha.it)('should not update gameBoard, but throw error', function (done) {
-                var expected = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]];
+            (0, _mocha.it)('should not update gameBoard', function (done) {
+                var expected = [[" ", " ", " "], [" ", " ", " "], [" ", " ", "O"]];
                 (0, _chai.expect)(JSON.stringify(sut.gameBoard)).to.equal(JSON.stringify(expected));
-                (0, _chai.expect)(function () {
-                    return sut.startGame(player1, player2);
-                }).to.throw(RangeError);
                 done();
             });
-            sut = new _gameEngine2.default();
+            //sut = new GameEngine();
         });
+        /*
+                describe('place gamePiece at out of range gameSquare', () => {
+                    
+                    before((done) => {
+                        sut.placeGamePiece(player1, [3, 0]);     
+                        done();
+                    });
+                    
+                    it('should not update gameBoard, but throw error', (done) => {
+                        expect(() => sut.startGame(player1, player2)).to.throw(RangeError);
+                        done();
+                    });
+                    sut = new GameEngine();
+                });
+                */
     });
 
     (0, _mocha.describe)('calculateThreeInARow', function () {
 
         (0, _mocha.describe)('calculates if three in a row is accomplished', function () {
             (0, _mocha.it)('should return false', function () {
-                (0, _chai.expect)(sut.calculateThreeInARow()).to.be.false;
+                (0, _chai.expect)(sut.calculateThreeInARow(player1)).to.be.false;
             });
         });
 
         (0, _mocha.describe)('calculates if three in a row is accomplished', function () {
 
             (0, _mocha.before)(function (done) {
-                var player1 = sinon.mock(_player2.default);
-                player1._gamePiece = 'X';
+                sut = new _gameEngine2.default();
+                sut.startGame(player1, player2);
                 sut.placeGamePiece(player1, [0, 0]);
                 sut.placeGamePiece(player1, [0, 1]);
                 sut.placeGamePiece(player1, [0, 2]);
@@ -170,9 +164,8 @@ function run() {
             });
 
             (0, _mocha.it)('should return true', function () {
-                (0, _chai.expect)(sut.calculateThreeInARow()).to.be.true;
+                (0, _chai.expect)(sut.calculateThreeInARow(player1)).to.be.true;
             });
-            sut = new _gameEngine2.default();
         });
     });
 
@@ -180,9 +173,9 @@ function run() {
 
         (0, _mocha.describe)('end game in progress', function () {
             var expected = {
-                players: [],
+                players: [player1, player2],
                 roundNumber: 0,
-                winner: ''
+                winner: player1._name
             };
             (0, _mocha.it)('should return current status for game then end it', function () {
                 (0, _chai.expect)(JSON.stringify(sut.endGame())).to.equal(JSON.stringify(expected));
@@ -190,21 +183,16 @@ function run() {
         });
 
         (0, _mocha.describe)('end game in progress', function () {
-            var player1 = void 0;
             (0, _mocha.before)(function (done) {
-                player1 = sinon.mock(_player2.default);
-                player1._gamePiece = 'X';
-                player1._name = 'Carl';
-                sut.placeGamePiece(player1, [0, 0]);
-                sut.placeGamePiece(player1, [0, 1]);
-                sut.placeGamePiece(player1, [0, 2]);
+                sut = new _gameEngine2.default();
+                sut.startGame(player1, player2);
                 done();
             });
 
             var expected = {
-                players: [player1],
+                players: [player1, player2],
                 roundNumber: 0,
-                winner: 'Carl'
+                winner: ''
             };
             (0, _mocha.it)('should return current status for game then end it', function () {
                 (0, _chai.expect)(JSON.stringify(sut.endGame())).to.equal(JSON.stringify(expected));

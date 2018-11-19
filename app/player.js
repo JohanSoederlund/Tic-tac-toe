@@ -21,7 +21,7 @@ export default class Player {
     }
 
     set name(name) {
-        if (typeof(winner) === "string" && 10 <= gamePiece.length <= 1){
+        if (typeof(name) === "string" && 10 <= name.length && name.length <= 1){
             this._name = name;
         } else {
             throw new TypeError("name must be between one and 10 characters long");
@@ -29,7 +29,7 @@ export default class Player {
     }
 
     set gamePiece(gamePiece) {
-        if (typeof(winner) === "string" && gamePiece.length === 1){
+        if (typeof(gamePiece) === "string" && gamePiece.length === 1){
             this._gamePice = gamePiece;
         } else {
             throw new TypeError("gamePiece must be one character long");
