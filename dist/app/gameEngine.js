@@ -1,5 +1,9 @@
 "use strict";
 
+/* 
+ * GameEngine class.
+ */
+
 Object.defineProperty(exports, "__esModule", {
     value: true
 });

@@ -1,5 +1,9 @@
 "use strict";
 
+/* 
+ * Player class.
+ */
+
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
