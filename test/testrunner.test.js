@@ -20,9 +20,13 @@ var gameEngineTests = require('./game-engine-test-suite');
 var playerTests = require('./player-test-suite');
 var appTests = require('./app-test-suite');
 var viewEngineTests = require('./view-engine-test-suite');
+var databaseManagerTests = require('./database-manager-test-suite');
+var databaseModelTests = require('./database-model-test-suite');
 
 // Runs
-viewEngineTests.run();
+//databaseModelTests.run();
+databaseManagerTests.run();
+//viewEngineTests.run();
 //gameEngineTests.run();
 //playerTests.run();
 //appTests.run();
