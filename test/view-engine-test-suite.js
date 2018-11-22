@@ -16,17 +16,17 @@ let sut = new ViewEngine();
 
 
 export function run() {
+    beforeEach(function(){
+        this.consoleStub = sinon.stub(console, "log");
+    });
+    afterEach(function(){
+        this.consoleStub.restore();
+    });
+
     describe('renderStartGame', () => {
 
         describe('Called once', () => {
             
-            beforeEach(function(){
-                this.consoleStub = sinon.stub(console, "log");
-            });
-            afterEach(function(){
-                this.consoleStub.restore();
-            });
-
             it('Should be called once', () => {
                 let renderStartGameSpy = sinon.spy(sut, 'renderStartGame');
                 sut.renderStartGame();
@@ -40,17 +40,10 @@ export function run() {
 
         describe('Called once', () => {
             
-            beforeEach(function(){
-                this.consoleStub = sinon.stub(console, "log");
-            });
-            afterEach(function(){
-                this.consoleStub.restore();
-            });
-
             it('Should be called once', () => {
-                let renderStartGameSpy = sinon.spy(sut, 'renderGameBoard');
-                sut.renderStartGame();
-                expect(renderStartGameSpy).to.have.been.calledOnce;
+                let renderGameBoardSpy = sinon.spy(sut, 'renderGameBoard');
+                sut.renderGameBoard();
+                expect(renderGameBoardSpy).to.have.been.calledOnce;
             });
 
         });
@@ -60,17 +53,10 @@ export function run() {
 
         describe('Called once', () => {
             
-            beforeEach(function(){
-                this.consoleStub = sinon.stub(console, "log");
-            });
-            afterEach(function(){
-                this.consoleStub.restore();
-            });
-
             it('Should be called once', () => {
-                let renderStartGameSpy = sinon.spy(sut, 'renderEndGame');
-                sut.renderStartGame();
-                expect(renderStartGameSpy).to.have.been.calledOnce;
+                let renderEndGameSpy = sinon.spy(sut, 'renderEndGame');
+                sut.renderEndGame();
+                expect(renderEndGameSpy).to.have.been.calledOnce;
             });
 
         });

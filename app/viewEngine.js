@@ -11,15 +11,12 @@ export default class ViewEngine {
     }
     
     renderStartGame() {
-        throw new Error();
     }
     
     renderGameBoard() {
-        throw new Error();
     }
 
     renderEndGame() {
-        throw new Error();
     }
 
 }
