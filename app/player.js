@@ -1,6 +1,8 @@
+"use strict";
 
-
-
+/* 
+ * Player class.
+ */
 export default class Player {
 	constructor(name, gamePiece) {
         this._name = name;

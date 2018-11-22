@@ -1,6 +1,8 @@
+"use strict";
 
-
-
+/* 
+ * GameEngine class.
+ */
 export default class GameEngine {
 
 	constructor() {
