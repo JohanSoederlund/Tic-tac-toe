@@ -77,17 +77,37 @@ export function run() {
             });
 
         });
-/*
+
         describe('disconnectDatabase', () => {
 
-            describe('', () => {
+            describe('called with correct db-string', () => {
                 
-                it('Should', () => {
-                });
+                let connectionSpy3;
+                
+                before(() => {
+                    sut = new DatabaseManager();
+                    connectionSpy3 = sinon.spy(sut, 'connectDatabase');
+                    sut.connectDatabase(correctConnectionString);
+				});
+
+                after(() => {
+                    connectionSpy3.restore();
+                    mongoose.connection.close();
+				});
+
+                it('should emit close-event', () => {
+					expect(connectionSpy3).to.have.been.calledOnce;
+				});
+
+				it('should disconnect the database', () => {
+					expect(mongoose.connection.readyState).to.equal(0);
+				});
+
 
             });
         });
 
+/*
         describe('saveGame', () => {
 
             describe('', () => {
