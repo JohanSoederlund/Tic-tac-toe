@@ -29,7 +29,7 @@ export default class DatabaseManager {
 	 * Disconnects from the database if there is an active connection.
 	 */
     disconnectDatabase() {
-
+        mongoose.connection.close();
     }
 
     /**

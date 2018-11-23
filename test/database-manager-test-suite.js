@@ -83,20 +83,25 @@ export function run() {
             describe('called with correct db-string', () => {
                 
                 let connectionSpy3;
+                let connectionSpy4;
                 
                 before(() => {
                     sut = new DatabaseManager();
                     connectionSpy3 = sinon.spy(sut, 'connectDatabase');
                     sut.connectDatabase(correctConnectionString);
+                    connectionSpy4 = sinon.spy(sut, 'disconnectDatabase');
+                    sut.disconnectDatabase();
 				});
 
                 after(() => {
                     connectionSpy3.restore();
+                    connectionSpy4.restore();
                     mongoose.connection.close();
 				});
 
                 it('should emit close-event', () => {
-					expect(connectionSpy3).to.have.been.calledOnce;
+                    expect(connectionSpy3).to.have.been.calledOnce;
+                    expect(connectionSpy4).to.have.been.calledOnce;
 				});
 
 				it('should disconnect the database', () => {
