@@ -14,7 +14,7 @@ import mongoose from 'mongoose';
 
 import DatabaseManager from '../app/databaseManager.js';
 let sut = new DatabaseManager();
-const correctConnectionString = 'mongodb://tic-tac-toe:27017';
+const correctConnectionString = 'mongodb://localhost:27017';
 const incorrectConnectionString = 'mongodb://tic-tac-toe:27018';
 
 
@@ -33,27 +33,29 @@ export function run() {
         describe('connectDatabase', () => {
 
             describe('called with correct db-string', () => {
-                const spy = sinon.spy();
-
+                let connectionSpy;
                 before(() => {
-                    sut.connect(correctConnectionString);
+                    connectionSpy = sinon.spy(sut, 'connectDatabase');
+                    sut.connectDatabase(correctConnectionString);
 				});
 
 				after(() => {
+                    connectionSpy.restore();
                     mongoose.connection.close();
 				});
 
                 it('should emit ready-event', () => {
-                    sut.connectDatabase(correctConnectionString);
-                    expect(spy.called).to.equal(true);
+                    expect(connectionSpy).to.have.been.calledOnce;
                 });
 
             });
 
             describe('called with incorrect db-string', () => {
-                const spy = sinon.spy();
+                let connectionSpy2;
                 
                 before(() => {
+                    sut = new DatabaseManager();
+                    connectionSpy2 = sinon.spy(sut, 'connectDatabase');
                     sut.connectDatabase(incorrectConnectionString);
 				});
 
@@ -61,17 +63,18 @@ export function run() {
                     mongoose.connection.close();
 				});
                 
-                it('should emit connection-error-event', () => {
-                    expect(spy.called).to.equal(true);
+                it('should be called once', () => {
+                    expect(connectionSpy2).to.have.been.calledOnce;
                 });
 
-                it('should pass the error on when emitting \'error\'-event', () => {
-					expect(spy.calledWith(undefined)).to.equal(false);
-					expect(spy.calledWith(null)).to.equal(false);
-					expect(spy.calledWith(sinon.match({}))).to.equal(true);
+                it('should emit connection-error-event', () => {
+					expect(connectionSpy2.calledWith(undefined)).to.equal(false);
+					expect(connectionSpy2.calledWith(null)).to.equal(false);
+					expect(connectionSpy2.calledWith(sinon.match({}))).to.equal(true);
 				});
 
             });
+
         });
 /*
         describe('disconnectDatabase', () => {

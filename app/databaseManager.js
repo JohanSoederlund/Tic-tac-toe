@@ -10,13 +10,19 @@ import DatabaseModel from './databaseModel';
 export default class DatabaseManager {
 
 	constructor() {
-        
+        //this.connectionString = 'mongodb://tic-tac-toe:27017';
+        this.connectionString = 'mongodb://localhost:27017';
     }
 
     /**
 	 * Connects to the database with the connectionstring given.
 	 */
 	connectDatabase() {
+        //mongoose.connect(this.connectionString, { useNewUrlParser: true })
+        mongoose.connect(this.connectionString)
+            .catch((err) => {
+                console.log('connection-error', err);
+            });
     }
     
     /**
