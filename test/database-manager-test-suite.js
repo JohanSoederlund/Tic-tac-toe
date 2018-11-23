@@ -60,6 +60,7 @@ export function run() {
 				});
 
                 after(() => {
+                    connectionSpy2.restore();
                     mongoose.connection.close();
 				});
                 
