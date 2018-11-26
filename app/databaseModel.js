@@ -8,11 +8,12 @@
 import mongoose from 'mongoose';
 
 /**
- * todo: REFACTOR so that players and gameBoard are broken up into attributes instead
+ * Database description of a complete Game.
  */
 var gameSchema = new mongoose.Schema({
-    players: { type: [], required: true } ,
-    gameBoard: { type: Array, required: true } ,
+    player1: { type: Object, required: true } ,
+    player2: { type: Object, required: true } ,
+    gameBoard: { type: Object, required: true } ,
     winner:  { type: String, required: true } ,
     roundNumber:  { type: Number, required: true } ,
   });
