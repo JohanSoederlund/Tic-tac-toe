@@ -195,19 +195,66 @@ export function run() {
             });
            
         });
-/*
-        describe('findGame', () => {
 
-            describe('', () => {
+        describe('findGame', () => {
+            let findGameSpy;
+            let findGameSpy2;
+
+            before(function(done) {
+                mockgoose.helper.setDbVersion('3.2.1');
+                mockgoose.prepareStorage().then(function() {
+                    mongoose.connect(correctConnectionString, function(err) {
+                        done(err);
+                    });
+                });
+            });
+
+            after((done) => {
+                findGameSpy.restore();
+                findGameSpy2.restore();
+                done();
+            });
+
+            describe('Try to find null', () => {
                 
                 it('Should', () => {
+                    findGameSpy = sinon.spy(sut, 'findGame');
+                    expect(() => sut.findGame(null)).to.be.false;
+                    expect(findGameSpy).to.have.been.calledOnce;
+                    expect(findGameSpy).to.have.been.calledWith(null);
+                    findGameSpy.restore();
+                    sut.findGame.restore();
+                });
+
+            });
+
+            describe('Try to find non existing game', () => {
+                
+                it('Should', () => {
+                    findGameSpy2 = sinon.spy(sut, 'findGame');
+                    expect(() => sut.findGame(game())).to.be.false;
+                    expect(findGameSpy2).to.have.been.calledOnce;
+                    expect(findGameSpy2).to.have.been.calledWith(game());
+                    findGameSpy2.restore();
+                });
+
+            });
+
+            describe('mock callback and call it', () => {
+                let findOne = sinon.stub(DatabaseModel, 'findOne');
+                findOne.yields();
+                let callbackSpy = sinon.spy();
+                sut.findGame({}, callbackSpy);
+
+                it('Should call callback', () => {
+                    expect(callbackSpy).to.have.been.calledOnce;
+                    findOne.restore();
                 });
 
             });
         });
-*/
+
     });
-    
 
 }
 

@@ -27,8 +27,8 @@ var databaseModelTests = require('./database-model-test-suite');
 
 // Runs
 //databaseModelTests.run();
-//databaseManagerTests.run();
+databaseManagerTests.run();
 //viewEngineTests.run();
 //gameEngineTests.run();
-playerTests.run();
+//playerTests.run();
 //appTests.run();
