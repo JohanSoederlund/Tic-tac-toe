@@ -22,21 +22,6 @@ var Player = function () {
     }
 
     _createClass(Player, [{
-        key: "setIsWinner",
-
-
-        /**
-         * sets this player to winner if won the game
-         * @param {boolean} winner true if this player won
-         */
-        value: function setIsWinner(winner) {
-            if (typeof winner === "boolean") {
-                this._isWinner = winner;
-            } else {
-                throw new TypeError("winner must be of boolean type");
-            }
-        }
-    }, {
         key: "name",
         get: function get() {
             return this._name;
@@ -73,10 +58,23 @@ var Player = function () {
                 throw new TypeError("gamePiece must be one character long");
             }
         }
+
+        /**
+         * sets this player to winner if won the game
+         * @param {boolean} winner true if this player won
+         */
+
     }, {
         key: "isWinner",
         get: function get() {
             return this._isWinner;
+        },
+        set: function set(winner) {
+            if (typeof winner === "boolean") {
+                this._isWinner = winner;
+            } else {
+                throw new TypeError("winner must be of boolean type");
+            }
         }
     }]);
 

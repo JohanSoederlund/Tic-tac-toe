@@ -10,6 +10,9 @@ import { it, describe, before, after } from 'mocha';
 import Player from '../app/player.js';
 let sut = new Player('Liz', 'Q');
 
+/**
+ * Test-suite for Player. 
+ */
 export function run() {
     
 	describe('isWinner', () => {
@@ -22,12 +25,12 @@ export function run() {
 
         describe('called after set to true', () => {
             before((done) => {
-                sut.setIsWinner(true);
+                sut.isWinner = true;
                 done();
             });
 
             after((done) => {
-                sut.setIsWinner(false);
+                sut.isWinner = false;
                 done();
             });
 
@@ -39,6 +42,9 @@ export function run() {
         describe('called after set to null', () => {
             it('should throw TypeError winner must be of boolean type', () => {
                 expect(() => sut.setIsWinner(null)).to.throw(TypeError);
+                expect(() => {
+                    sut.isWinner = null;
+                }).to.throw(Error);
                 expect(sut.isWinner).to.be.false;
             });
         });

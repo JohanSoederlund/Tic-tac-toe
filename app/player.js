@@ -51,7 +51,7 @@ export default class Player {
      * sets this player to winner if won the game
      * @param {boolean} winner true if this player won
      */
-    setIsWinner(winner) {
+    set isWinner(winner) {
         if (typeof(winner) === "boolean"){
             this._isWinner = winner;
         } else {

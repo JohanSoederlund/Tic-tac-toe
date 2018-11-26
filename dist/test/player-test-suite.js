@@ -15,9 +15,14 @@ var _player2 = _interopRequireDefault(_player);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var sut = new _player2.default('Liz', 'Q'); /**
-                                             * Test suite for the gameEngine class.
-                                             */
+var sut = new _player2.default('Liz', 'Q');
+
+/**
+ * Test-suite for Player. 
+ */
+/**
+ * Test suite for the gameEngine class.
+ */
 
 // Requires
 
@@ -33,12 +38,12 @@ function run() {
 
         (0, _mocha.describe)('called after set to true', function () {
             (0, _mocha.before)(function (done) {
-                sut.setIsWinner(true);
+                sut.isWinner = true;
                 done();
             });
 
             (0, _mocha.after)(function (done) {
-                sut.setIsWinner(false);
+                sut.isWinner = false;
                 done();
             });
 
@@ -52,6 +57,9 @@ function run() {
                 (0, _chai.expect)(function () {
                     return sut.setIsWinner(null);
                 }).to.throw(TypeError);
+                (0, _chai.expect)(function () {
+                    sut.isWinner = null;
+                }).to.throw(Error);
                 (0, _chai.expect)(sut.isWinner).to.be.false;
             });
         });
