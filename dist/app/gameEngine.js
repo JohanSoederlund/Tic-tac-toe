@@ -24,8 +24,20 @@ var GameEngine = function () {
         this._gameBoard = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]];
     }
 
+    /**
+     * Updates gameBoard
+     * @param {Array} gameBoard 
+     */
+
+
     _createClass(GameEngine, [{
         key: "placeGamePiece",
+
+
+        /**
+         * Calculates if a move is correct and then updates the gameBoard
+         * @param {Array} gameBoard 
+         */
         value: function placeGamePiece(player, placement) {
             if ((typeof player === "undefined" ? "undefined" : _typeof(player)) !== "object" || placement.isArray === false) {
                 throw new TypeError("player and placement must be of valid type");
@@ -44,6 +56,12 @@ var GameEngine = function () {
                 }
             }
         }
+
+        /**
+         * Calculates if a player has three in a row
+         * @param {Object} player 
+         */
+
     }, {
         key: "calculateThreeInARow",
         value: function calculateThreeInARow(player) {
@@ -64,6 +82,13 @@ var GameEngine = function () {
             });
             return win;
         }
+
+        /**
+         * Instatiates a new game with two players
+         * @param {Object} player1 
+         * @param {Object} player2
+         */
+
     }, {
         key: "startGame",
         value: function startGame(player1, player2) {
@@ -86,6 +111,11 @@ var GameEngine = function () {
                 winner: this.winner
             };
         }
+
+        /**
+         * Ends a game in progress
+         */
+
     }, {
         key: "endGame",
         value: function endGame() {

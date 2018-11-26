@@ -23,6 +23,12 @@ var Player = function () {
 
     _createClass(Player, [{
         key: "setIsWinner",
+
+
+        /**
+         * sets this player to winner if won the game
+         * @param {boolean} winner true if this player won
+         */
         value: function setIsWinner(winner) {
             if (typeof winner === "boolean") {
                 this._isWinner = winner;
@@ -35,6 +41,12 @@ var Player = function () {
         get: function get() {
             return this._name;
         },
+
+
+        /**
+         * Player nickname
+         * @param {String} name 
+         */
         set: function set(name) {
             if (typeof name === "string" && 10 <= name.length && name.length <= 1) {
                 this._name = name;
@@ -42,6 +54,12 @@ var Player = function () {
                 throw new TypeError("name must be between one and 10 characters long");
             }
         }
+
+        /**
+         * The players GamePiece represented as one char
+         * @param {Character} gamePiece 
+         */
+
     }, {
         key: "gamePiece",
         get: function get() {

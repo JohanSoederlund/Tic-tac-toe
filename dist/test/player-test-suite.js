@@ -63,4 +63,66 @@ function run() {
             });
         });
     });
+
+    (0, _mocha.describe)('name', function () {
+
+        (0, _mocha.describe)('called with falsy player', function () {
+
+            (0, _mocha.it)('should throw error', function () {
+                (0, _chai.expect)(function () {
+                    sut.name = "WayToLongNameKalle";
+                }).to.throw(Error);
+                (0, _chai.expect)(sut.name).to.equal('Liz');
+            });
+        });
+
+        (0, _mocha.describe)('called after set to null', function () {
+            (0, _mocha.it)('should throw TypeError name must be max 10 characters long', function () {
+                (0, _chai.expect)(function () {
+                    sut.name = null;
+                }).to.throw(Error);
+                (0, _chai.expect)(sut.name).to.equal('Liz');
+            });
+        });
+
+        (0, _mocha.describe)('called after set to Lizz', function () {
+            (0, _mocha.it)('should not throw TypeError name must be max 10 characters long', function () {
+                (0, _chai.expect)(function () {
+                    sut.name = "Lizz";
+                }).to.not.throw(Error);
+                (0, _chai.expect)(sut.name).to.equal('Lizz');
+            });
+        });
+    });
+
+    (0, _mocha.describe)('gamePiece', function () {
+
+        (0, _mocha.describe)('called with falsy player', function () {
+
+            (0, _mocha.it)('should throw error', function () {
+                (0, _chai.expect)(function () {
+                    sut.gamePiece = "XO";
+                }).to.throw(Error);
+                (0, _chai.expect)(sut.gamePiece).to.equal('Q');
+            });
+        });
+
+        (0, _mocha.describe)('called after set to null', function () {
+            (0, _mocha.it)('should throw Error', function () {
+                (0, _chai.expect)(function () {
+                    sut.gamePiece = null;
+                }).to.throw(Error);
+                (0, _chai.expect)(sut.gamePiece).to.equal('Q');
+            });
+        });
+
+        (0, _mocha.describe)('called after set to X', function () {
+            (0, _mocha.it)('Should not throw TypeError gamePiece must be one character long', function () {
+                (0, _chai.expect)(function () {
+                    sut.gamePiece = "X";
+                }).to.not.throw(Error);
+                (0, _chai.expect)(sut.gamePiece).to.equal('X');
+            });
+        });
+    });
 }

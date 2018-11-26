@@ -45,5 +45,67 @@ export function run() {
 
     });
 
+    describe('name', () => {
+        
+        describe('called with falsy player', () => {
+
+            it('should throw error', () => {
+                expect(() => {
+                    sut.name = "WayToLongNameKalle";
+                }).to.throw(Error);
+                expect(sut.name).to.equal('Liz');
+            });
+        });
+
+        describe('called after set to null', () => {
+            it('should throw TypeError name must be max 10 characters long', () => {
+                expect(() => {
+                    sut.name = null;
+                }).to.throw(Error);
+                expect(sut.name).to.equal('Liz');
+            });
+        });
+
+        describe('called after set to Lizz', () => {
+            it('should not throw TypeError name must be max 10 characters long', () => {
+                expect(() => {
+                    sut.name = "Lizz";
+                }).to.not.throw(Error);
+                expect(sut.name).to.equal('Lizz');
+            });
+        });
+    });
+
+    describe('gamePiece', () => {
+        
+        describe('called with falsy player', () => {
+
+            it('should throw error', () => {
+                expect(() => {
+                    sut.gamePiece = "XO";
+                }).to.throw(Error);
+                expect(sut.gamePiece).to.equal('Q');
+            });
+        });
+
+        describe('called after set to null', () => {
+            it('should throw Error', () => {
+                expect(() => {
+                    sut.gamePiece = null;
+                }).to.throw(Error);
+                expect(sut.gamePiece).to.equal('Q');
+            });
+        });
+
+        describe('called after set to X', () => {
+            it('Should not throw TypeError gamePiece must be one character long', () => {
+                expect(() => {
+                    sut.gamePiece = "X";
+                }).to.not.throw(Error);
+                expect(sut.gamePiece).to.equal('X');
+            });
+        });
+    });
+
 }
 
