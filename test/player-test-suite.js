@@ -6,12 +6,12 @@
 
 import { expect } from 'chai';
 import { it, describe, before, after } from 'mocha';
-import * as sinon from 'sinon';
 
 import Player from '../app/player.js';
 let sut = new Player('Liz', 'Q');
 
 export function run() {
+    
 	describe('isWinner', () => {
 
         describe('called before set', () => {
@@ -74,6 +74,7 @@ export function run() {
                 expect(sut.name).to.equal('Lizz');
             });
         });
+        
     });
 
     describe('gamePiece', () => {

@@ -27,7 +27,7 @@ export default class Player {
      * @param {String} name 
      */
     set name(name) {
-        if (typeof(name) === "string" && 10 <= name.length && name.length <= 1){
+        if (typeof(name) === "string" && 10 >= name.length && name.length >= 1){
             this._name = name;
         } else {
             throw new TypeError("name must be between one and 10 characters long");
@@ -39,6 +39,7 @@ export default class Player {
      * @param {Character} gamePiece 
      */
     set gamePiece(gamePiece) {
+        
         if (typeof(gamePiece) === "string" && gamePiece.length === 1){
             this._gamePice = gamePiece;
         } else {

@@ -48,7 +48,7 @@ var Player = function () {
          * @param {String} name 
          */
         set: function set(name) {
-            if (typeof name === "string" && 10 <= name.length && name.length <= 1) {
+            if (typeof name === "string" && 10 >= name.length && name.length >= 1) {
                 this._name = name;
             } else {
                 throw new TypeError("name must be between one and 10 characters long");
@@ -66,6 +66,7 @@ var Player = function () {
             return this._gamePice;
         },
         set: function set(gamePiece) {
+
             if (typeof gamePiece === "string" && gamePiece.length === 1) {
                 this._gamePice = gamePiece;
             } else {
