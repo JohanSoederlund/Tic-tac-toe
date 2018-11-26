@@ -2,7 +2,7 @@
 
 // Imports
 import mongoose from 'mongoose';
-import DatabaseModel from './databaseModel';
+import DatabaseModel from '../app/databaseModel.js';
 
 /* 
  * DatabaseManager class.
@@ -10,7 +10,6 @@ import DatabaseModel from './databaseModel';
 export default class DatabaseManager {
 
 	constructor() {
-        //this.connectionString = 'mongodb://tic-tac-toe:27017';
         this.connectionString = 'mongodb://localhost:27017';
     }
 
@@ -39,8 +38,26 @@ export default class DatabaseManager {
 	 * Adds the given game to the databse.
 	 * if game exist that one will be updated with the new information, and no new document will be created.
 	 */
-    saveGame() {
-
+    saveGame(game) {
+        if(JSON.stringify(game.schema) !== JSON.stringify(DatabaseModel.schema)) {
+            throw new Error();
+        } 
+        const options = {
+            new: true,
+            upsert: true,
+            setDefaultsOnInsert: true
+        };
+        return new Promise((resolve, reject) => {
+			DatabaseModel.findOneAndUpdate(game._id, game, options, (err, saved) => {
+				if (err) {
+                    reject(err);
+                    throw new Error();
+				}
+				resolve(saved);
+			});
+		}).catch((err) => {
+            throw err;
+        });
     }
 
     /**

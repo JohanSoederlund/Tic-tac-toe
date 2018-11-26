@@ -129,9 +129,7 @@ export function run() {
             before(function(done) {
                 mockgoose.helper.setDbVersion('3.2.1');
                 mockgoose.prepareStorage().then(function() {
-                    console.log("prep!!!!!!!!!!!");
                     mongoose.connect(correctConnectionString, function(err) {
-                        console.log("connect!!!!!!!!!!");
                         done(err);
                     });
                 });
@@ -179,8 +177,7 @@ export function run() {
                 it('Should store new instance of Game in database', () => {
                     saveGameSpy.restore();
                     saveGameSpy = sinon.spy(sut, 'saveGame');
-                    let gameMock = sinon.mock(DatabaseModel);
-                    expect(() => sut.saveGame(game())).to.throw(Error);
+                    expect(() => sut.saveGame(game())).to.not.throw(Error);
                     expect(saveGameSpy).to.have.been.calledOnce;
                 });
 
@@ -224,7 +221,7 @@ function fakeGame() {
         roundNumber:  { type: Number, required: true } ,
       });
     var fakeGame = mongoose.model('FakeGame', fakeGameSchema);
-    return new fakeGame(player1, player2, gameBoard, winner, roundNumber);
+    return new fakeGame({player1, player2, gameBoard, winner, roundNumber});
 }
 
 function game() {
@@ -236,14 +233,5 @@ function game() {
             [" ", " ", " "]   ] };
     let roundNumber = 0;
     let winner = " ";
-
-    var gameSchema = new mongoose.Schema({
-        player1: { type: Object, required: true } ,
-        player2: { type: Object, required: true } ,
-        gameBoard: { type: Object, required: true } ,
-        winner:  { type: String, required: true } ,
-        roundNumber:  { type: Number, required: true } ,
-      });
-    var game = mongoose.model('FakeGame', fakeGameSchema);
-    return new game(player1, player2, gameBoard, winner, roundNumber);
+    return new DatabaseModel(player1, player2, gameBoard, winner, roundNumber);
 }
