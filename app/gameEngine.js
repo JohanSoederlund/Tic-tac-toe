@@ -16,6 +16,10 @@ export default class GameEngine {
         ];
     }
 
+    /**
+     * Updates gameBoard
+     * @param {Array} gameBoard 
+     */
     set gameBoard(gameBoard) {
         if (gameBoard.isArray && gameBoard[0].isArray) {
             this._gameBoard = gameBoard;
@@ -28,6 +32,10 @@ export default class GameEngine {
         return this._gameBoard;
     }
 
+    /**
+     * Calculates if a move is correct and then updates the gameBoard
+     * @param {Array} gameBoard 
+     */
     placeGamePiece(player, placement) {
         if (typeof(player) !== "object" || placement.isArray === false) {
             throw new TypeError("player and placement must be of valid type");
@@ -48,6 +56,10 @@ export default class GameEngine {
         
     }
 
+    /**
+     * Calculates if a player has three in a row
+     * @param {Object} player 
+     */
     calculateThreeInARow(player) {
         if (this._gameBoard[0][0] === player._gamePiece) {
             if (this._gameBoard[0][0] === this._gameBoard[1][0] && this._gameBoard[1][0] === this._gameBoard[2][0]) return true;
@@ -67,6 +79,11 @@ export default class GameEngine {
         return win;
     }
 
+    /**
+     * Instatiates a new game with two players
+     * @param {Object} player1 
+     * @param {Object} player2
+     */
     startGame(player1, player2) {
         if (typeof(player1) !== "object" || typeof(player2) !== "object") {
             throw new TypeError("players must be of valid type");
@@ -87,6 +104,9 @@ export default class GameEngine {
         }
     }
 
+    /**
+     * Ends a game in progress
+     */
     endGame() {
         if (this.calculateThreeInARow(this.players[0])) this.winner = this.players[0]._name;
         if (this.calculateThreeInARow(this.players[1])) this.winner = this.players[1]._name;

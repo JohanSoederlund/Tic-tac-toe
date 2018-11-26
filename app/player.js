@@ -22,6 +22,10 @@ export default class Player {
         return this._isWinner;
     }
 
+    /**
+     * Player nickname
+     * @param {String} name 
+     */
     set name(name) {
         if (typeof(name) === "string" && 10 <= name.length && name.length <= 1){
             this._name = name;
@@ -30,6 +34,10 @@ export default class Player {
         }
     }
 
+    /**
+     * The players GamePiece represented as one char
+     * @param {Character} gamePiece 
+     */
     set gamePiece(gamePiece) {
         if (typeof(gamePiece) === "string" && gamePiece.length === 1){
             this._gamePice = gamePiece;
@@ -38,6 +46,10 @@ export default class Player {
         }
     }
 
+    /**
+     * sets this player to winner if won the game
+     * @param {boolean} winner true if this player won
+     */
     setIsWinner(winner) {
         if (typeof(winner) === "boolean"){
             this._isWinner = winner;

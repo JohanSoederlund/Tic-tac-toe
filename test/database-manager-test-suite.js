@@ -21,9 +21,14 @@ let sut = new DatabaseManager();
 const correctConnectionString = 'mongodb://localhost:27017';
 const incorrectConnectionString = 'mongodb://tic-tac-toe:27018';
 
-
+/**
+ * Test-suite for database manager. 
+ */
 export function run() {
 
+    /**
+     * Spies on true connections to the database.
+     */
     describe('connectDatabase', () => {
 
         beforeEach(function(){
@@ -87,6 +92,9 @@ export function run() {
 
         });
 
+        /**
+         * Spies on true connections to the database.
+         */
         describe('disconnectDatabase', () => {
 
             describe('called with correct db-string', () => {
@@ -123,6 +131,9 @@ export function run() {
             });
         });
 
+        /**
+         * Tests faulty models and one object of correct model, then findAndUpdate/save to mocked database.
+         */
         describe('saveGame', () => {
             let saveGameSpy;
 

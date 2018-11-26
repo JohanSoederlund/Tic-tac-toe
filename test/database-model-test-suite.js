@@ -1,9 +1,6 @@
-/**
- * Test suite for the databaseModel.
- */
+"use strict";
 
 // Requires
-
 import chai from 'chai';
 import { expect } from 'chai';
 import { it, describe, before, after } from 'mocha';
@@ -12,11 +9,15 @@ import sinonChai from 'sinon-chai';
 chai.use(sinonChai);
 
 import Game from '../app/databaseModel';
-import Player from '../app/player';
-import GameEngine from '../app/gameEngine';
 
+/**
+ * Test-suite for database model. 
+ */
 export function run() {
     
+    /**
+     * Validates different inputs to mongoose model.
+     */
     describe('gameModel', () => {
         let player1 = {};
         let player2 = {};
@@ -53,7 +54,6 @@ export function run() {
             });
             
         });
-
        
         it('should be invalid if gameBoard is NOT present', (done) => {
             const game = new Game({player1: gameEngine._players[0], player2: gameEngine._players[1], winner: gameEngine._winner, roundNumber: gameEngine._roundNumber});
