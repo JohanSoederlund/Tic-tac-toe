@@ -196,6 +196,9 @@ export function run() {
            
         });
 
+        /**
+         * Tests findGame, mocking mongoose.
+         */
         describe('findGame', () => {
 
             before(function(done) {
