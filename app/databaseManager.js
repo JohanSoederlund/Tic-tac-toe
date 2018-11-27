@@ -63,8 +63,15 @@ export default class DatabaseManager {
     /**
 	 * Finds a game in the databse.
 	 */
-    findGame() {
-
+    findGame(game, callback) {
+        DatabaseModel.findOne(game)
+			.then((game) => {
+				callback(game);
+			})
+			.catch((error) => {
+                console.log(error);
+				callback(error);
+            });
     }
 
 }

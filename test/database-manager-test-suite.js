@@ -29,7 +29,7 @@ export function run() {
     /**
      * Spies on true connections to the database.
      */
-    describe('connectDatabase', () => {
+    describe('Database manager', () => {
 
         beforeEach(function(){
         });
@@ -197,8 +197,6 @@ export function run() {
         });
 
         describe('findGame', () => {
-            let findGameSpy;
-            let findGameSpy2;
 
             before(function(done) {
                 mockgoose.helper.setDbVersion('3.2.1');
@@ -209,49 +207,37 @@ export function run() {
                 });
             });
 
-            after((done) => {
-                findGameSpy.restore();
-                findGameSpy2.restore();
-                done();
-            });
-
             describe('Try to find null', () => {
-                
-                it('Should', () => {
-                    findGameSpy = sinon.spy(sut, 'findGame');
-                    expect(() => sut.findGame(null)).to.be.false;
+                let findGameSpy = sinon.spy(sut, 'findGame');
+                let callbackSpy = sinon.spy();
+                sut.findGame(null, callbackSpy);
+
+                it('Should be called with null and call callback with null', () => {
+                    expect(callbackSpy).to.have.been.calledOnce;
+                    expect(callbackSpy).to.have.been.calledWith(null);
                     expect(findGameSpy).to.have.been.calledOnce;
                     expect(findGameSpy).to.have.been.calledWith(null);
                     findGameSpy.restore();
-                    sut.findGame.restore();
                 });
 
             });
 
             describe('Try to find non existing game', () => {
-                
-                it('Should', () => {
-                    findGameSpy2 = sinon.spy(sut, 'findGame');
-                    expect(() => sut.findGame(game())).to.be.false;
-                    expect(findGameSpy2).to.have.been.calledOnce;
-                    expect(findGameSpy2).to.have.been.calledWith(game());
-                    findGameSpy2.restore();
-                });
-
-            });
-
-            describe('mock callback and call it', () => {
-                let findOne = sinon.stub(DatabaseModel, 'findOne');
-                findOne.yields();
+                sut = new DatabaseManager();
+                let findGameSpy = sinon.spy(sut, 'findGame');
                 let callbackSpy = sinon.spy();
-                sut.findGame({}, callbackSpy);
+                sut.findGame(game(), callbackSpy);
 
-                it('Should call callback', () => {
+                it('Should be called with game() and call callback with null', () => {
                     expect(callbackSpy).to.have.been.calledOnce;
-                    findOne.restore();
+                    expect(callbackSpy).to.have.been.calledWith(null);
+                    expect(findGameSpy).to.have.been.calledOnce;
+                    expect(findGameSpy).to.have.been.calledWith(game());
+                    findGameSpy.restore();
                 });
 
             });
+
         });
 
     });
