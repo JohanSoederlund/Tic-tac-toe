@@ -68,10 +68,15 @@ var App = function () {
             }
             return true;
         }
+
+        /**
+         * Request a move from one Player.
+         */
+
     }, {
         key: 'requestPlayerMove',
         value: function requestPlayerMove() {
-            throw new Error();
+            this.viewEngine.renderRequestPlayerMove();
         }
     }, {
         key: 'checkGameStatus',

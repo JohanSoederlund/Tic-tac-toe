@@ -43,8 +43,11 @@ export default class App {
         return true;
     }
 
+    /**
+     * Request a move from one Player.
+     */
     requestPlayerMove() {
-        throw new Error();
+        this.viewEngine.renderRequestPlayerMove();
     }
 
     checkGameStatus() {
