@@ -75,8 +75,8 @@ var App = function () {
 
     }, {
         key: 'requestPlayerMove',
-        value: function requestPlayerMove() {
-            this.viewEngine.renderRequestPlayerMove();
+        value: function requestPlayerMove(player) {
+            this.viewEngine.renderRequestPlayerMove(player);
         }
     }, {
         key: 'checkGameStatus',

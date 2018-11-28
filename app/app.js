@@ -46,8 +46,8 @@ export default class App {
     /**
      * Request a move from one Player.
      */
-    requestPlayerMove() {
-        this.viewEngine.renderRequestPlayerMove();
+    requestPlayerMove(player) {
+        this.viewEngine.renderRequestPlayerMove(player);
     }
 
     checkGameStatus() {

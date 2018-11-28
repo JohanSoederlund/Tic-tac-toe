@@ -97,12 +97,12 @@ export function run() {
             
         it('should be called once', () => {
             let viewEngineMock = sinon.mock(ViewEngine);
-            viewEngineMock.renderRequestPlayerMove = function(){};
+            viewEngineMock.renderRequestPlayerMove = function(player){};
             sut.viewEngine = viewEngineMock;
             let requestPlayerMoveSpy = sinon.spy(sut, 'requestPlayerMove');
 
-            sut.requestPlayerMove();
-            expect(requestPlayerMoveSpy).to.have.been.calledOnce;
+            sut.requestPlayerMove('Johan');
+            expect(requestPlayerMoveSpy).to.have.been.calledOnceWith('Johan');
             sut = new App();
         });
 
