@@ -97,7 +97,9 @@ var App = function () {
         }
     }, {
         key: 'showFinishedGame',
-        value: function showFinishedGame() {}
+        value: function showFinishedGame() {
+            throw new Error();
+        }
     }, {
         key: 'roundLoop',
         value: function roundLoop() {}

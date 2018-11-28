@@ -92,7 +92,7 @@ export function run() {
             sut = new App();
         });
     });
-    
+
     describe('requestPlayerMove', () => {
             
         it('should be called once', () => {
@@ -139,32 +139,21 @@ export function run() {
         });
 
     });
-/*
-    describe('roundLoop', () => {
-
-        describe('', () => {
-            
-            it('should', () => {
-
-            });
-        });
-
-
-    });
-
+    
     describe('showFinishedGame', () => {
 
-        describe('', () => {
+        it('should be called once', () => {
+            let viewEngineMock = sinon.mock(ViewEngine);
+            viewEngineMock.renderEndGame = function(game){};
+            sut.viewEngine = viewEngineMock;
             
-            it('should', () => {
-                //expect showFinishedGame to be called once
-                //expect call to view class (mock)
-            });
+            let showFinishedGameSpy = sinon.spy(sut, 'showFinishedGame');
+
+            sut.showFinishedGame();
+            expect(showFinishedGameSpy).to.have.been.calledOnce;
+            sut = new App();
         });
 
-
     });
-    */
 
 }
-

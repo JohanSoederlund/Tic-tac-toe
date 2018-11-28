@@ -24,7 +24,7 @@ export default class ViewEngine {
                     
     }
 
-    renderEndGame() {
+    renderEndGame(game) {
         console.log(" players: this.players\n roundNumber: this.roundNumber\n winner: this.winner");
     }
 
