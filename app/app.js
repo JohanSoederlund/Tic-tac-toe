@@ -50,11 +50,15 @@ export default class App {
         this.viewEngine.renderRequestPlayerMove(player);
     }
 
-    checkGameStatus() {
-
+    checkGameOver() {
+        
     }
 
     showFinishedGame() {
+        
+    }
+
+    roundLoop() {
         
     }
     

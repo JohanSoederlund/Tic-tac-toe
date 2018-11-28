@@ -79,11 +79,14 @@ var App = function () {
             this.viewEngine.renderRequestPlayerMove(player);
         }
     }, {
-        key: 'checkGameStatus',
-        value: function checkGameStatus() {}
+        key: 'checkGameOver',
+        value: function checkGameOver() {}
     }, {
         key: 'showFinishedGame',
         value: function showFinishedGame() {}
+    }, {
+        key: 'roundLoop',
+        value: function roundLoop() {}
     }]);
 
     return App;

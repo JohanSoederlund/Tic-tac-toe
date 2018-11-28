@@ -107,21 +107,39 @@ export function run() {
         });
 
     });
-/*
+
     describe('checkGameOver', () => {
 
-        describe('', () => {
-            
-            it('should', () => {
-                //expect checkGameStatus to be called once
-                //if gameover expect call to showFinishedGame
-                //else expect call to requestPlayerMove
-            });
+        it('should return true', () => {
+            let gameEngineMock = sinon.mock(GameEngine);
+            gameEngineMock.calculateThreeInARow = function(player){return true;};
+            gameEngineMock.players = [];
+            gameEngineMock.players[0] = 'Johan';
+            sut.gameEngine = gameEngineMock;
+            let checkGameOver = sinon.spy(sut, 'checkGameOver');
+
+            let actual = sut.checkGameOver();
+            expect(checkGameOver).to.have.been.calledOnce;
+            expect(actual).to.be.true;
+            sut = new App();    
         });
 
+        it('should return false', () => {
+            let gameEngineMock = sinon.mock(GameEngine);
+            gameEngineMock.calculateThreeInARow = function(player){return false;};
+            gameEngineMock.players = [];
+            gameEngineMock.players[0] = 'Daniel';
+            sut.gameEngine = gameEngineMock;
+            let checkGameOver = sinon.spy(sut, 'checkGameOver');
+
+            let actual = sut.checkGameOver();
+            expect(checkGameOver).to.have.been.calledOnce;
+            expect(actual).to.be.false;
+            sut = new App();    
+        });
 
     });
-
+/*
     describe('roundLoop', () => {
 
         describe('', () => {
