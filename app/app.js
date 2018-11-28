@@ -50,13 +50,16 @@ export default class App {
         this.viewEngine.renderRequestPlayerMove(player);
     }
 
+    /**
+     * Check if the game is won by either one of the Players.
+     */
     checkGameOver() {
-        if (this.gameEngine.calculateThreeInARow(this.gameEngine.players[0])) {
-            this.gameEngine.winner = this.gameEngine.players[0];
-            return true;
-        } else if(this.gameEngine.calculateThreeInARow(this.gameEngine.players[1])) {
-            this.gameEngine.winner = this.gameEngine.players[1];
-            return true;
+        for(let i = 0; i < 2; i++) {
+            let player = this.gameEngine.players[i];
+            if (this.gameEngine.calculateThreeInARow(player)) {
+                this.gameEngine.winner = player;
+                return true;
+            }
         }
         return false;
     }
