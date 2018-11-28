@@ -51,7 +51,14 @@ export default class App {
     }
 
     checkGameOver() {
-        
+        if (this.gameEngine.calculateThreeInARow(this.gameEngine.players[0])) {
+            this.gameEngine.winner = this.gameEngine.players[0];
+            return true;
+        } else if(this.gameEngine.calculateThreeInARow(this.gameEngine.players[1])) {
+            this.gameEngine.winner = this.gameEngine.players[1];
+            return true;
+        }
+        return false;
     }
 
     showFinishedGame() {
