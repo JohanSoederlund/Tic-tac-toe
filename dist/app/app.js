@@ -64,14 +64,15 @@ var App = function () {
             try {
                 this.gameEngine.startGame(new _player2.default(playerNames[0], 'X'), new _player2.default(playerNames[1], 'O'));
             } catch (error) {
-                console.log("!!!!!!!!!!!!!!!!!!!!!!!!");
                 return false;
             }
             return true;
         }
     }, {
         key: 'requestPlayerMove',
-        value: function requestPlayerMove() {}
+        value: function requestPlayerMove() {
+            throw new Error();
+        }
     }, {
         key: 'checkGameStatus',
         value: function checkGameStatus() {}

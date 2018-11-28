@@ -44,7 +44,7 @@ export default class App {
     }
 
     requestPlayerMove() {
-
+        throw new Error();
     }
 
     checkGameStatus() {

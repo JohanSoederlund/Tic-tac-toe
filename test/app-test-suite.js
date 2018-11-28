@@ -92,21 +92,22 @@ export function run() {
             sut = new App();
         });
     });
-
-    /*
+    
     describe('requestPlayerMove', () => {
-
-        describe('', () => {
             
-            it('should', () => {
-                //expect requestPlayerMove to be called once
-                //expect w8 for input (mock) then call checkGameStatus
-            });
+        it('should be called once', () => {
+            let viewEngineMock = sinon.mock(ViewEngine);
+            viewEngineMock.renderRequestPlayerMove = function(){};
+            sut.viewEngine = viewEngineMock;
+            let requestPlayerMoveSpy = sinon.spy(sut, 'requestPlayerMove');
+
+            sut.requestPlayerMove();
+            expect(requestPlayerMoveSpy).to.have.been.calledOnce;
+            sut = new App();
         });
 
-
     });
-
+/*
     describe('checkGameOver', () => {
 
         describe('', () => {

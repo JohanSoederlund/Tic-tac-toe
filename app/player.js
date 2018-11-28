@@ -27,7 +27,6 @@ export default class Player {
      * @param {String} name 
      */
     set name(name) {
-        console.log(name+ "   SETTER");
         if (typeof(name) === "string" && 10 >= name.length && name.length >= 1){
             this._name = name;
         } else {
