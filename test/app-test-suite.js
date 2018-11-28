@@ -15,19 +15,40 @@ import App from '../app/app.js';
 let sut = new App();
 
 export function run() {
+
 	describe('instanciateNewGame', () => {
 
-        describe('', () => {
-            
-            it('should', () => {
-                //expect instanciateNewGame to be called once
-                //expect call to addPlayers
-                expect(JSON.stringify(actual)).to.equal(JSON.stringify(expected));
-            });
+        it('should return true', () => {
+            let ViewEngineMock = sinon.mock(ViewEngine);
+            ViewEngineMock.renderStartGame = function(){};
+            ViewEngineMock.renderRequestNameInput = function(){};
+            sut.viewEngine = ViewEngineMock;
+            sut.addPlayers = function(playerNames){ return true; };
+            let instanciateNewGameSpy = sinon.spy(sut, 'instanciateNewGame');
+            let actual = sut.instanciateNewGame();
+
+            expect(actual).to.be.true;
+            expect(instanciateNewGameSpy).to.have.been.calledOnce;
+            sut = new App();
+        });
+
+        it('should return false', () => {
+            let ViewEngineMock = sinon.mock(ViewEngine);
+            ViewEngineMock.renderStartGame = function(){};
+            ViewEngineMock.renderRequestNameInput = function(){};
+            sut.viewEngine = ViewEngineMock;
+            sut.addPlayers = function(playerNames){ return false; };
+            let instanciateNewGameSpy = sinon.spy(sut, 'instanciateNewGame');
+            let actual = sut.instanciateNewGame();
+
+            expect(actual).to.be.false;
+            expect(instanciateNewGameSpy).to.have.been.calledOnce;
+            sut = new App();
         });
 
     });
 
+    /*
     describe('addPlayers', () => {
 
         let player1 = sinon.mock(Player);
@@ -39,6 +60,7 @@ export function run() {
             it('should', () => {
                 //expect addPlayers to be called once with player1 and player2 
                 //expect call to requestPlayerMove
+                expect(JSON.stringify(actual)).to.equal(JSON.stringify(expected));
             });
         });
 
@@ -58,7 +80,7 @@ export function run() {
 
     });
 
-    describe('checkGameStatus', () => {
+    describe('checkGameOver', () => {
 
         describe('', () => {
             
@@ -66,6 +88,18 @@ export function run() {
                 //expect checkGameStatus to be called once
                 //if gameover expect call to showFinishedGame
                 //else expect call to requestPlayerMove
+            });
+        });
+
+
+    });
+
+    describe('roundLoop', () => {
+
+        describe('', () => {
+            
+            it('should', () => {
+
             });
         });
 
@@ -84,6 +118,7 @@ export function run() {
 
 
     });
+    */
 
 }
 

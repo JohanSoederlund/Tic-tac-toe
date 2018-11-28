@@ -24,7 +24,7 @@ export function run() {
     });
 
     describe('renderStartGame', () => {
-
+        
         describe('Called once', () => {
             
             it('Should be called once', () => {
@@ -61,4 +61,39 @@ export function run() {
 
         });
     });
+
+    /*
+    describe('renderBadPlayerMove', () => {
+
+        describe('Called once', () => {
+            
+            it('Should be called once', () => {
+                let renderEndGameSpy = sinon.spy(sut, 'renderEndGame');
+                sut.renderEndGame();
+                expect(renderEndGameSpy).to.have.been.calledOnce;
+            });
+
+        });
+    });
+
+    describe('renderRequestPlayerMove', () => {
+
+        describe('Called once', () => {
+            
+            it('Should be called once', () => {
+            });
+
+        });
+    });
+
+    describe('renderRequestNameInput', () => {
+
+        describe('Called once', () => {
+            
+            it('Should be called once', () => {
+            });
+
+        });
+    });
+    */
 }

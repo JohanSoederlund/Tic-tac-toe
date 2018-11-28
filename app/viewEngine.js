@@ -28,4 +28,16 @@ export default class ViewEngine {
         console.log(" players: this.players\n roundNumber: this.roundNumber\n winner: this.winner");
     }
 
+    renderBadPlayerMove() {
+        
+    }
+
+    renderRequestPlayerMove() {
+
+    }
+
+    renderRequestNameInput() {
+
+    }
+
 }

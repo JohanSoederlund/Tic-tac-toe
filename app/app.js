@@ -8,6 +8,7 @@ import Player from './player';
  * App controller class.
  */
 export default class App {
+
 	constructor() {
         this.gameEngine = new GameEngine();
         this.viewEngine = new ViewEngine();
@@ -32,4 +33,5 @@ export default class App {
     showFinishedGame() {
         
     }
+    
 }
