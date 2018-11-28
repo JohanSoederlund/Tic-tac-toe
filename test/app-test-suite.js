@@ -146,6 +146,10 @@ export function run() {
             let viewEngineMock = sinon.mock(ViewEngine);
             viewEngineMock.renderEndGame = function(game){};
             sut.viewEngine = viewEngineMock;
+
+            let gameEngineMock = sinon.mock(GameEngine);
+            gameEngineMock.endGame = function(){};
+            sut.gameEngine = gameEngineMock;
             
             let showFinishedGameSpy = sinon.spy(sut, 'showFinishedGame');
 

@@ -98,7 +98,7 @@ var App = function () {
     }, {
         key: 'showFinishedGame',
         value: function showFinishedGame() {
-            this.viewEngine.renderEndGame();
+            this.viewEngine.renderEndGame(this.gameEngine.endGame());
         }
     }, {
         key: 'roundLoop',

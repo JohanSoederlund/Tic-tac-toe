@@ -65,7 +65,7 @@ export default class App {
     }
 
     showFinishedGame() {
-        this.viewEngine.renderEndGame();
+        this.viewEngine.renderEndGame(this.gameEngine.endGame());
     }
 
     roundLoop() {
