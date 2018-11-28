@@ -28,8 +28,13 @@ export default class App {
         return playerAddedSuccessfully;
     }
 
-    addPlayers() {
-       
+    addPlayers(playerNames) {
+        try {
+            this.gameEngine.startGame(new Player(playerNames[0], 'X'), new Player(playerNames[1], 'O'));
+        } catch (error) {
+            return false;
+        }
+        return true;
     }
 
     requestPlayerMove() {

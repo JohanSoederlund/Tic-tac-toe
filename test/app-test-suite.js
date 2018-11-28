@@ -64,7 +64,7 @@ export function run() {
             sut = new App();
         });
 
-        it('should return true', () => {
+        it('should return false', () => {
             let gameEngineMock = sinon.mock(GameEngine);
             gameEngineMock.startGame = function(player1, player2){throw new Error('Unit test error')};
             

@@ -52,7 +52,14 @@ var App = function () {
         }
     }, {
         key: 'addPlayers',
-        value: function addPlayers() {}
+        value: function addPlayers(playerNames) {
+            try {
+                this.gameEngine.startGame(new _player2.default(playerNames[0], 'X'), new _player2.default(playerNames[1], 'O'));
+            } catch (error) {
+                return false;
+            }
+            return true;
+        }
     }, {
         key: 'requestPlayerMove',
         value: function requestPlayerMove() {}
