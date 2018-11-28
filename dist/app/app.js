@@ -34,99 +34,31 @@ var App = function () {
     }
 
     _createClass(App, [{
-        key: 'roundLoop',
-        value: function roundLoop() {
-            var index = 0;
-            while (!this.checkGameOver()) {
-                try {
-                    this.viewEngine.renderGameBoard(this.gameEngine._gameBoard);
-                    var playerMove = this.requestPlayerMove(this.gameEngine.players[index]);
-                    this.gameEngine.placeGamePiece(this.gameEngine.players[index], playerMove);
-                    if (index === 0) {
-                        index = 1;
-                    } else {
-                        index = 0;
-                    }
-                } catch (error) {
-                    this.viewEngine.renderBadPlayerMove();
-                }
-            }
-            this.showFinishedGame();
-        }
-    }, {
         key: 'instanciateNewGame',
         value: function instanciateNewGame() {
             this.viewEngine.renderStartGame();
             var playerAddedSuccessfully = false;
             var index = 5;
             while (!playerAddedSuccessfully && index > 0) {
-                playerAddedSuccessfully = this.addPlayers(this.viewEngine.renderRequestNameInput());
+                if (index > 0) {
+                    playerAddedSuccessfully = this.addPlayers(this.viewEngine.renderRequestNameInput());
+                }
                 index--;
             }
             return playerAddedSuccessfully;
         }
     }, {
         key: 'addPlayers',
-        value: function addPlayers(playerNames) {
-            try {
-                var player1 = new _player2.default(playerNames[0], 'X');
-                var player2 = new _player2.default(playerNames[1], 'O');
-                this.gameEngine.startGame(player1, player2);
-            } catch (error) {
-                return false;
-            }
-            return true;
-        }
+        value: function addPlayers() {}
     }, {
         key: 'requestPlayerMove',
-        value: function requestPlayerMove() {
-            this.viewEngine.renderRequestPlayerMove();
-        }
+        value: function requestPlayerMove() {}
     }, {
-        key: 'checkGameOver',
-        value: function checkGameOver() {
-            if (this.gameEngine.calculateThreeInARow(this.gameEngine.players[0])) {
-                this.gameEngine.winner = this.gameEngine.players[0];
-                return true;
-            } else if (this.gameEngine.calculateThreeInARow(this.gameEngine.players[1])) {
-                this.gameEngine.winner = this.gameEngine.players[1];
-                return true;
-            }
-            return false;
-        }
+        key: 'checkGameStatus',
+        value: function checkGameStatus() {}
     }, {
         key: 'showFinishedGame',
-        value: function showFinishedGame() {
-            this.viewEngine.renderEndGame(this.gameEngine.endGame());
-        }
-
-        /*
-        	constructor() {
-                this.gameEngine = new GameEngine();
-                this.viewEngine = new ViewEngine();
-            }
-            
-            instanciateNewGame() {
-        
-            }
-        
-            addPlayers() {
-        
-            }
-        
-            requestPlayerMove() {
-        
-            }
-        
-            checkGameStatus() {
-        
-            }
-        
-            showFinishedGame() {
-                
-            }
-            */
-
+        value: function showFinishedGame() {}
     }]);
 
     return App;

@@ -15,7 +15,16 @@ export default class App {
     }
     
     instanciateNewGame() {
-
+        this.viewEngine.renderStartGame();
+        let playerAddedSuccessfully = false;
+        let index = 5;
+        while(!playerAddedSuccessfully && index > 0) {
+            if (index > 0) {
+                playerAddedSuccessfully = this.addPlayers(this.viewEngine.renderRequestNameInput());
+            }
+            index--;
+        }
+        return playerAddedSuccessfully;
     }
 
     addPlayers() {
