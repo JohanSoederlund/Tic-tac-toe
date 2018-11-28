@@ -98,7 +98,7 @@ var App = function () {
     }, {
         key: 'showFinishedGame',
         value: function showFinishedGame() {
-            throw new Error();
+            this.viewEngine.renderEndGame();
         }
     }, {
         key: 'roundLoop',

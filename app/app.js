@@ -65,7 +65,7 @@ export default class App {
     }
 
     showFinishedGame() {
-        throw new Error();
+        this.viewEngine.renderEndGame();
     }
 
     roundLoop() {
