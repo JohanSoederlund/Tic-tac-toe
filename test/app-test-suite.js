@@ -77,6 +77,20 @@ export function run() {
             expect(addPlayersSpy).to.have.been.calledOnceWith(['Olle', 'Lisa']);
             sut = new App();
         });
+
+        it('should return false', () => {
+            let gameEngineMock = sinon.mock(GameEngine);
+            gameEngineMock.startGame = function(player1, player2){throw new Error('Unit test error')};
+            
+            sut.gameEngine = gameEngineMock;
+            let addPlayersSpy = sinon.spy(sut, 'addPlayers');
+            let actual = sut.addPlayers(null);
+
+            expect(actual).to.be.false;
+            expect(addPlayersSpy).to.have.been.calledOnce;
+            expect(addPlayersSpy).to.have.been.calledOnceWith(null);
+            sut = new App();
+        });
     });
 
     /*

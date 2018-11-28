@@ -50,12 +50,21 @@ var App = function () {
             }
             return playerAddedSuccessfully;
         }
+
+        /**
+         * Add two players to game engine.
+         */
+
     }, {
         key: 'addPlayers',
         value: function addPlayers(playerNames) {
+            if (!Array.isArray(playerNames)) {
+                return false;
+            }
             try {
                 this.gameEngine.startGame(new _player2.default(playerNames[0], 'X'), new _player2.default(playerNames[1], 'O'));
             } catch (error) {
+                console.log("!!!!!!!!!!!!!!!!!!!!!!!!");
                 return false;
             }
             return true;

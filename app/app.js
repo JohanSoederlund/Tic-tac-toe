@@ -28,7 +28,13 @@ export default class App {
         return playerAddedSuccessfully;
     }
 
+    /**
+     * Add two players to game engine.
+     */
     addPlayers(playerNames) {
+        if (!Array.isArray(playerNames)) {
+            return false;
+        }
         try {
             this.gameEngine.startGame(new Player(playerNames[0], 'X'), new Player(playerNames[1], 'O'));
         } catch (error) {
