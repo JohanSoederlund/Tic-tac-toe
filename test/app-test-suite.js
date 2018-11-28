@@ -47,26 +47,39 @@ export function run() {
         });
 
     });
-
-    /*
+    
     describe('addPlayers', () => {
 
-        let player1 = sinon.mock(Player);
-        let player2 = sinon.mock(Player);
-        sut.addPlayers(player1, player2);
-
-        describe('', () => {
+        it('should return true', () => {
+            let gameEngineMock = sinon.mock(GameEngine);
+            gameEngineMock.startGame = function(player1, player2){};
             
-            it('should', () => {
-                //expect addPlayers to be called once with player1 and player2 
-                //expect call to requestPlayerMove
-                expect(JSON.stringify(actual)).to.equal(JSON.stringify(expected));
-            });
+            sut.gameEngine = gameEngineMock;
+            let addPlayersSpy = sinon.spy(sut, 'addPlayers');
+            let actual = sut.addPlayers(['Johan', 'Klara']);
+
+            expect(actual).to.be.true;
+            expect(addPlayersSpy).to.have.been.calledOnce;
+            expect(addPlayersSpy).to.have.been.calledOnceWith(['Johan', 'Klara']);
+            sut = new App();
         });
 
+        it('should return true', () => {
+            let gameEngineMock = sinon.mock(GameEngine);
+            gameEngineMock.startGame = function(player1, player2){throw new Error('Unit test error')};
+            
+            sut.gameEngine = gameEngineMock;
+            let addPlayersSpy = sinon.spy(sut, 'addPlayers');
+            let actual = sut.addPlayers(['Olle', 'Lisa']);
 
+            expect(actual).to.be.false;
+            expect(addPlayersSpy).to.have.been.calledOnce;
+            expect(addPlayersSpy).to.have.been.calledOnceWith(['Olle', 'Lisa']);
+            sut = new App();
+        });
     });
 
+    /*
     describe('requestPlayerMove', () => {
 
         describe('', () => {

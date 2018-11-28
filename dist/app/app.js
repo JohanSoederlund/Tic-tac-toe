@@ -33,6 +33,11 @@ var App = function () {
         this.viewEngine = new _viewEngine2.default();
     }
 
+    /**
+     * Initiates new game with two players added to game engine.
+     */
+
+
     _createClass(App, [{
         key: 'instanciateNewGame',
         value: function instanciateNewGame() {
@@ -40,9 +45,7 @@ var App = function () {
             var playerAddedSuccessfully = false;
             var index = 5;
             while (!playerAddedSuccessfully && index > 0) {
-                if (index > 0) {
-                    playerAddedSuccessfully = this.addPlayers(this.viewEngine.renderRequestNameInput());
-                }
+                playerAddedSuccessfully = this.addPlayers(this.viewEngine.renderRequestNameInput());
                 index--;
             }
             return playerAddedSuccessfully;
