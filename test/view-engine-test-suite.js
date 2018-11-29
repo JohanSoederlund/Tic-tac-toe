@@ -25,6 +25,12 @@ export function run() {
         it('Should be called once', () => {
             let renderStartGameSpy = sinon.spy(sut, 'renderStartGame');
             sut.renderStartGame();
+            let actual = sut._consoleText;
+            expect(actual).to.be.equal( "Tic-tac-toe\n\n Aim for three in a row and win this simple game.\n" +
+            "   {X}  |  { }  |  { }   \n" + 
+            "   -------------------\n" +
+            "   { }  |  {O}  |  { }   \n" +
+            "   { }  |  {X}  |  { }   ");
             expect(renderStartGameSpy).to.have.been.calledOnce;
         });
     });
