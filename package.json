@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "test": "mocha --timeout 120000 dist/test/*.test.js"
+    "test": "nyc mocha --timeout 120000 dist/test/*.test.js"
   },
   "keywords": [],
   "author": "Johan Söderlund",
