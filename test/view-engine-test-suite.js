@@ -20,7 +20,7 @@ export function run() {
     afterEach(function(){
         this.consoleStub.restore();
     });
-
+/*
     describe('renderStartGame', () => {
         it('Should be called once', () => {
             let renderStartGameSpy = sinon.spy(sut, 'renderStartGame');
@@ -54,17 +54,21 @@ export function run() {
             expect(renderBadPlayerMoveSpy).to.have.been.calledOnce;
         });
     });
-
+*/
     describe('renderRequestPlayerMove', () => {
         it('Should be called once and set consoletext', () => {
+            sut._readline.question = function(){ return 0; };
+
             let renderRequestPlayerMoveSpy = sinon.spy(sut, 'renderRequestPlayerMove');
-            sut.renderRequestPlayerMove();
+            let returnValue = sut.renderRequestPlayerMove();
             let actual = sut._consoleText;
             expect(actual).to.be.equal("Insert 0-8 to place game piece at chosen position on the board:");
             expect(renderRequestPlayerMoveSpy).to.have.been.calledOnce;
+            expect(returnValue).to.equal(0);
         });
     });
-    
+   
+    /*
     describe('renderRequestNameInput', () => {
         it('Should be called once and set consoletext', () => {
             let renderRequestNameInputSpy = sinon.spy(sut, 'renderRequestNameInput');
@@ -74,5 +78,5 @@ export function run() {
             expect(renderRequestNameInputSpy).to.have.been.calledOnce;
         });
     });
-    
+    */
 }
