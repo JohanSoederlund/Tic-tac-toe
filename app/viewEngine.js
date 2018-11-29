@@ -19,11 +19,11 @@ export default class ViewEngine {
     }
     
     renderGameBoard(gameBoard) {
-        console.log("   {0}  |  {1}  |  {2}   ");
-        console.log("   -------------------");
-        console.log("   {3}  |  {4}  |  {5}   ");
-        console.log("   -------------------");
-        console.log("   {6}  |  {7}  |  {8}   ");
+        this._consoleText = "   {"+gameBoard[0][0]+"}  |  {"+gameBoard[0][1]+"}  |  {"+gameBoard[0][2]+"}   \n" + 
+        "   -------------------\n" + 
+        "   {"+gameBoard[1][0]+"}  |  {"+gameBoard[1][1]+"}  |  {"+gameBoard[1][2]+"}   \n" + 
+        "   {"+gameBoard[2][0]+"}  |  {"+gameBoard[2][1]+"}  |  {"+gameBoard[2][2]+"}   "; 
+        console.log(this._consoleText);
     }
 
     renderEndGame(game) {
