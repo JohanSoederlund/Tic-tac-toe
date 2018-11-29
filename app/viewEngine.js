@@ -11,6 +11,7 @@ export default class ViewEngine {
 
 	constructor() {
         this._consoleText = "";
+        this._readline = readline;
     }
     
     renderStartGame() {
@@ -37,6 +38,7 @@ export default class ViewEngine {
     renderRequestPlayerMove() {
         this._consoleText = "Insert 0-8 to place game piece at chosen position on the board:"; 
         console.log(this._consoleText);
+        return this._readline.question();
     }
 
     renderRequestNameInput() {
