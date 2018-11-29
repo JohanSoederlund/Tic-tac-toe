@@ -27,7 +27,8 @@ export default class ViewEngine {
     }
 
     renderEndGame(game) {
-        console.log(" players: this.players\n roundNumber: this.roundNumber\n winner: this.winner");
+        this._consoleText = "players: {name: " + game.players[0].name + ", gamePiece: " + game.players[0].gamePiece + "}, {name: " + game.players[1].name + ", gamePiece: " + game.players[1].gamePiece + "}\n roundNumber: " + game.roundNumber + "\n winner: " + game.winner;
+        console.log(this._consoleText);
     }
 
     renderBadPlayerMove() {
