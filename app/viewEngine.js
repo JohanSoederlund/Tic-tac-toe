@@ -8,7 +8,7 @@
 export default class ViewEngine {
 
 	constructor() {
-
+        this._consoleText = "";
     }
     
     renderStartGame() {
@@ -21,7 +21,6 @@ export default class ViewEngine {
         console.log("   {3}  |  {4}  |  {5}   ");
         console.log("   -------------------");
         console.log("   {6}  |  {7}  |  {8}   ");
-                    
     }
 
     renderEndGame(game) {

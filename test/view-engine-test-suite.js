@@ -22,7 +22,7 @@ export function run() {
     afterEach(function(){
         this.consoleStub.restore();
     });
-
+/*
     describe('renderStartGame', () => {
         
         describe('Called once', () => {
@@ -61,21 +61,23 @@ export function run() {
 
         });
     });
-
-    /*
+*/
+    
     describe('renderBadPlayerMove', () => {
 
         describe('Called once', () => {
             
             it('Should be called once', () => {
-                let renderEndGameSpy = sinon.spy(sut, 'renderEndGame');
-                sut.renderEndGame();
-                expect(renderEndGameSpy).to.have.been.calledOnce;
+                let renderBadPlayerMoveSpy = sinon.spy(sut, 'renderBadPlayerMove');
+                sut.renderBadPlayerMove();
+                let actual = sut._consoleText;
+                expect(actual).to.be.equal("Invalid move. Please try again!");
+                expect(renderBadPlayerMoveSpy).to.have.been.calledOnce;
             });
 
         });
     });
-
+/*
     describe('renderRequestPlayerMove', () => {
 
         describe('Called once', () => {
