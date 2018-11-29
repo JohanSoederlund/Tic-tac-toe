@@ -76,7 +76,7 @@ export function run() {
 
         });
     });
-    */
+    
 
     describe('renderRequestPlayerMove', () => {
 
@@ -92,16 +92,21 @@ export function run() {
 
         });
     });
-
-    /*
+    */
+    
     describe('renderRequestNameInput', () => {
 
         describe('Called once', () => {
             
-            it('Should be called once', () => {
+            it('Should be called once and set consoletext', () => {
+                let renderRequestNameInputSpy = sinon.spy(sut, 'renderRequestNameInput');
+                sut.renderRequestNameInput();
+                let actual = sut._consoleText;
+                expect(actual).to.be.equal("Insert nickname:");
+                expect(renderRequestNameInputSpy).to.have.been.calledOnce;
             });
 
         });
     });
-    */
+    
 }
