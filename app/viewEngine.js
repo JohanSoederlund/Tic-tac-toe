@@ -45,6 +45,7 @@ export default class ViewEngine {
     renderRequestNameInput() {
         this._consoleText = "Insert nickname:"; 
         console.log(this._consoleText);
+        return this._readline.question();
     }
 
 }

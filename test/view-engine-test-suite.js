@@ -20,7 +20,7 @@ export function run() {
     afterEach(function(){
         this.consoleStub.restore();
     });
-/*
+
     describe('renderStartGame', () => {
         it('Should be called once', () => {
             let renderStartGameSpy = sinon.spy(sut, 'renderStartGame');
@@ -32,11 +32,21 @@ export function run() {
     describe('renderGameBoard', () => {
         it('Should be called once', () => {
             let renderGameBoardSpy = sinon.spy(sut, 'renderGameBoard');
-            sut.renderGameBoard();
+            let gameBoard = [
+                ["X", " ", " "],
+                [" ", "O", " "],
+                [" ", "X", " "]
+            ];
+            sut.renderGameBoard(gameBoard);
+            let actual = sut._consoleText;
+            expect(actual).to.be.equal( "   {X}  |  { }  |  { }   \n" + 
+            "   -------------------\n" +
+            "   { }  |  {O}  |  { }   \n" +
+            "   { }  |  {X}  |  { }   ");
             expect(renderGameBoardSpy).to.have.been.calledOnce;
         });
     });
-*/
+
     describe('renderEndGame', () => {
 
         it('Should be called once with valid game', () => {
@@ -56,7 +66,7 @@ export function run() {
             });
         });
     });
-  /*  
+  
     describe('renderBadPlayerMove', () => {
         it('Should be called once and set consoletext', () => {
             let renderBadPlayerMoveSpy = sinon.spy(sut, 'renderBadPlayerMove');
@@ -82,15 +92,15 @@ export function run() {
    
     describe('renderRequestNameInput', () => {
         it('Should be called once and set consoletext', () => {
-            sut._readline.question = function(){ return 8; };
+            sut._readline.question = function(){ return "Olof"; };
 
             let renderRequestNameInputSpy = sinon.spy(sut, 'renderRequestNameInput');
             let returnValue = sut.renderRequestNameInput();
             let actual = sut._consoleText;
             expect(actual).to.be.equal("Insert nickname:");
             expect(renderRequestNameInputSpy).to.have.been.calledOnce;
-            expect(returnValue).to.equal(8);
+            expect(returnValue).to.equal("Olof");
         });
     });
-    */
+    
 }
