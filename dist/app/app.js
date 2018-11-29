@@ -95,14 +95,41 @@ var App = function () {
             }
             return false;
         }
+
+        /**
+         * Calls viewengine to render finished game.
+         */
+
     }, {
         key: 'showFinishedGame',
         value: function showFinishedGame() {
             this.viewEngine.renderEndGame(this.gameEngine.endGame());
         }
+
+        /**
+         * Iterates until one player won by three in a row.
+         */
+
     }, {
         key: 'roundLoop',
-        value: function roundLoop() {}
+        value: function roundLoop() {
+            var index = 0;
+            while (!this.checkGameOver()) {
+                try {
+                    this.viewEngine.renderGameBoard(this.gameEngine._gameBoard);
+                    var playerMove = this.requestPlayerMove(this.gameEngine.players[index]);
+                    this.gameEngine.placeGamePiece(this.gameEngine.players[index], playerMove);
+                    if (index === 0) {
+                        index = 1;
+                    } else {
+                        index = 0;
+                    }
+                } catch (error) {
+                    this.viewEngine.renderBadPlayerMove();
+                }
+            }
+            this.showFinishedGame();
+        }
     }]);
 
     return App;

@@ -64,12 +64,33 @@ export default class App {
         return false;
     }
 
+    /**
+     * Calls viewengine to render finished game.
+     */
     showFinishedGame() {
         this.viewEngine.renderEndGame(this.gameEngine.endGame());
     }
 
+    /**
+     * Iterates until one player won by three in a row.
+     */
     roundLoop() {
-        
+        let index = 0;
+        while(!this.checkGameOver()) {
+            try {
+                this.viewEngine.renderGameBoard(this.gameEngine._gameBoard);
+                let playerMove = this.requestPlayerMove(this.gameEngine.players[index])
+                this.gameEngine.placeGamePiece(this.gameEngine.players[index], playerMove);
+                if (index === 0) {
+                    index = 1;
+                } else {
+                    index = 0;
+                }
+            } catch (error) {
+                this.viewEngine.renderBadPlayerMove();
+            }
+        }
+        this.showFinishedGame();
     }
     
 }
