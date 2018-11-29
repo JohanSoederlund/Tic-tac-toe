@@ -18,7 +18,7 @@ export default class ViewEngine {
         console.log("Tic-tac-toe\n\n Aim for three in a row and win this simple game.\n\n player 1 input name:");
     }
     
-    renderGameBoard() {
+    renderGameBoard(gameBoard) {
         console.log("   {0}  |  {1}  |  {2}   ");
         console.log("   -------------------");
         console.log("   {3}  |  {4}  |  {5}   ");
