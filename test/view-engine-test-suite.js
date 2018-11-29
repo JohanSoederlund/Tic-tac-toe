@@ -20,7 +20,7 @@ export function run() {
     afterEach(function(){
         this.consoleStub.restore();
     });
-/*
+
     describe('renderStartGame', () => {
         it('Should be called once', () => {
             let renderStartGameSpy = sinon.spy(sut, 'renderStartGame');
@@ -54,7 +54,7 @@ export function run() {
             expect(renderBadPlayerMoveSpy).to.have.been.calledOnce;
         });
     });
-*/
+
     describe('renderRequestPlayerMove', () => {
         it('Should be called once and set consoletext', () => {
             sut._readline.question = function(){ return 0; };
@@ -68,15 +68,16 @@ export function run() {
         });
     });
    
-    /*
     describe('renderRequestNameInput', () => {
         it('Should be called once and set consoletext', () => {
+            sut._readline.question = function(){ return 8; };
+
             let renderRequestNameInputSpy = sinon.spy(sut, 'renderRequestNameInput');
-            sut.renderRequestNameInput();
+            let returnValue = sut.renderRequestNameInput();
             let actual = sut._consoleText;
             expect(actual).to.be.equal("Insert nickname:");
             expect(renderRequestNameInputSpy).to.have.been.calledOnce;
+            expect(returnValue).to.equal(8);
         });
     });
-    */
 }
