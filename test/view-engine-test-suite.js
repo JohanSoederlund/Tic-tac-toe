@@ -61,13 +61,12 @@ export function run() {
 
         });
     });
-*/
     
     describe('renderBadPlayerMove', () => {
 
         describe('Called once', () => {
             
-            it('Should be called once', () => {
+            it('Should be called once and set consoletext', () => {
                 let renderBadPlayerMoveSpy = sinon.spy(sut, 'renderBadPlayerMove');
                 sut.renderBadPlayerMove();
                 let actual = sut._consoleText;
@@ -77,17 +76,24 @@ export function run() {
 
         });
     });
-/*
+    */
+
     describe('renderRequestPlayerMove', () => {
 
         describe('Called once', () => {
             
-            it('Should be called once', () => {
+            it('Should be called once and set consoletext', () => {
+                let renderRequestPlayerMoveSpy = sinon.spy(sut, 'renderRequestPlayerMove');
+                sut.renderRequestPlayerMove();
+                let actual = sut._consoleText;
+                expect(actual).to.be.equal("Insert 0-8 to place game piece at chosen position on the board:");
+                expect(renderRequestPlayerMoveSpy).to.have.been.calledOnce;
             });
 
         });
     });
 
+    /*
     describe('renderRequestNameInput', () => {
 
         describe('Called once', () => {
