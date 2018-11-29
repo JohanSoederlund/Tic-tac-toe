@@ -28,7 +28,8 @@ export default class ViewEngine {
     }
 
     renderBadPlayerMove() {
-        
+        this._consoleText = "Invalid move. Please try again!"; 
+        console.log(this._consoleText);
     }
 
     renderRequestPlayerMove() {
