@@ -160,4 +160,70 @@ export function run() {
 
     });
 
+    describe('roundLoop', () => {
+
+        it('should be called once', () => {
+            sut.checkGameOver = function(){ if (this._i++ === 0) {
+                return true;
+            }
+            return false;
+             };
+            sut.showFinishedGame = function(){};
+            sut.requestPlayerMove = function(player){ return {}; };
+            sut._i = -3;
+
+            let viewEngineMock = sinon.mock(ViewEngine);
+            viewEngineMock.renderGameBoard = function(gameBoard){};
+            viewEngineMock.renderBadPlayerMove = function(){};
+
+            sut.viewEngine = viewEngineMock;
+
+            let gameEngineMock = sinon.mock(GameEngine);
+            gameEngineMock.placeGamePiece = function(player, playerMove){};
+            gameEngineMock._gameBoard = {};
+            gameEngineMock.players = [];
+            gameEngineMock.players[0] = {};
+            gameEngineMock.players[1] = {};
+
+            sut.gameEngine = gameEngineMock;
+            
+            let roundLoopSpy = sinon.spy(sut, 'roundLoop');
+            let renderGameBoardSpy = sinon.spy(sut.viewEngine, 'renderGameBoard');
+
+            sut.roundLoop();
+            expect(roundLoopSpy).to.have.been.calledOnce;
+            expect(viewEngineMock.renderGameBoard).to.have.been.calledThrice;
+            sut = new App();
+        });
+
+        it('should be called once', () => {
+            sut.checkGameOver = function(){ return false; };
+            sut.showFinishedGame = function(){};
+            sut.requestPlayerMove = function(player){ return {}; };
+
+            let viewEngineMock = sinon.mock(ViewEngine);
+            viewEngineMock.renderGameBoard = function(gameBoard){throw new Error();};
+            viewEngineMock.renderBadPlayerMove = function(){throw new Error();};
+
+            sut.viewEngine = viewEngineMock;
+
+            let gameEngineMock = sinon.mock(GameEngine);
+            gameEngineMock.placeGamePiece = function(player, playerMove){};
+            gameEngineMock._gameBoard = {};
+            gameEngineMock.players = [];
+            gameEngineMock.players[0] = {};
+            gameEngineMock.players[1] = {};
+
+            sut.gameEngine = gameEngineMock;
+            
+            let roundLoopSpy = sinon.spy(sut, 'roundLoop');
+
+            expect(() => sut.roundLoop()).to.throw(Error);
+            expect(roundLoopSpy).to.have.been.calledOnce;
+            
+            sut = new App();
+        });
+
+    });
+
 }
