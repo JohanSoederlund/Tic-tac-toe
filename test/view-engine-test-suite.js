@@ -26,11 +26,14 @@ export function run() {
             let renderStartGameSpy = sinon.spy(sut, 'renderStartGame');
             sut.renderStartGame();
             let actual = sut._consoleText;
-            expect(actual).to.be.equal( "Tic-tac-toe\n\n Aim for three in a row and win this simple game.\n" +
-            "   {X}  |  { }  |  { }   \n" + 
+            expect(actual).to.be.equal(
+            "Tic-tac-toe\n\n" +
+            "Aim for three in a row and win this simple game.\n" +
+            "   {0}  |  {1}  |  {2}   \n" + 
             "   -------------------\n" +
-            "   { }  |  {O}  |  { }   \n" +
-            "   { }  |  {X}  |  { }   ");
+            "   {3}  |  {4}  |  {5}   \n" +
+            "   -------------------\n" + 
+            "   {6}  |  {7}  |  {8}   ");
             expect(renderStartGameSpy).to.have.been.calledOnce;
         });
     });
@@ -48,6 +51,7 @@ export function run() {
             expect(actual).to.be.equal( "   {X}  |  { }  |  { }   \n" + 
             "   -------------------\n" +
             "   { }  |  {O}  |  { }   \n" +
+            "   -------------------\n" + 
             "   { }  |  {X}  |  { }   ");
             expect(renderGameBoardSpy).to.have.been.calledOnce;
         });
