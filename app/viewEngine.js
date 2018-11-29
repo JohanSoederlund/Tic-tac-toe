@@ -33,7 +33,8 @@ export default class ViewEngine {
     }
 
     renderRequestPlayerMove() {
-        
+        this._consoleText = "Insert 0-8 to place game piece at chosen position on the board:"; 
+        console.log("Insert 0-8 to place game piece at chosen position on the board:");
     }
 
     renderRequestNameInput() {
