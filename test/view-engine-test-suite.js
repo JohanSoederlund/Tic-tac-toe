@@ -3,7 +3,6 @@
  */
 
 // Requires
-
 import chai from 'chai';
 import { expect } from 'chai';
 import { it, describe, before, after } from 'mocha';
@@ -14,7 +13,6 @@ chai.use(sinonChai);
 import ViewEngine from '../app/viewEngine.js';
 let sut = new ViewEngine();
 
-
 export function run() {
     beforeEach(function(){
         this.consoleStub = sinon.stub(console, "log");
@@ -24,86 +22,56 @@ export function run() {
     });
 
     describe('renderStartGame', () => {
-        
-        describe('Called once', () => {
-            
-            it('Should be called once', () => {
-                let renderStartGameSpy = sinon.spy(sut, 'renderStartGame');
-                sut.renderStartGame();
-                expect(renderStartGameSpy).to.have.been.calledOnce;
-            });
-
+        it('Should be called once', () => {
+            let renderStartGameSpy = sinon.spy(sut, 'renderStartGame');
+            sut.renderStartGame();
+            expect(renderStartGameSpy).to.have.been.calledOnce;
         });
     });
 
     describe('renderGameBoard', () => {
-
-        describe('Called once', () => {
-            
-            it('Should be called once', () => {
-                let renderGameBoardSpy = sinon.spy(sut, 'renderGameBoard');
-                sut.renderGameBoard();
-                expect(renderGameBoardSpy).to.have.been.calledOnce;
-            });
-
+        it('Should be called once', () => {
+            let renderGameBoardSpy = sinon.spy(sut, 'renderGameBoard');
+            sut.renderGameBoard();
+            expect(renderGameBoardSpy).to.have.been.calledOnce;
         });
     });
 
     describe('renderEndGame', () => {
-
-        describe('Called once', () => {
-            
-            it('Should be called once', () => {
-                let renderEndGameSpy = sinon.spy(sut, 'renderEndGame');
-                sut.renderEndGame();
-                expect(renderEndGameSpy).to.have.been.calledOnce;
-            });
-
+        it('Should be called once', () => {
+            let renderEndGameSpy = sinon.spy(sut, 'renderEndGame');
+            sut.renderEndGame();
+            expect(renderEndGameSpy).to.have.been.calledOnce;
         });
     });
     
     describe('renderBadPlayerMove', () => {
-
-        describe('Called once', () => {
-            
-            it('Should be called once and set consoletext', () => {
-                let renderBadPlayerMoveSpy = sinon.spy(sut, 'renderBadPlayerMove');
-                sut.renderBadPlayerMove();
-                let actual = sut._consoleText;
-                expect(actual).to.be.equal("Invalid move. Please try again!");
-                expect(renderBadPlayerMoveSpy).to.have.been.calledOnce;
-            });
-
+        it('Should be called once and set consoletext', () => {
+            let renderBadPlayerMoveSpy = sinon.spy(sut, 'renderBadPlayerMove');
+            sut.renderBadPlayerMove();
+            let actual = sut._consoleText;
+            expect(actual).to.be.equal("Invalid move. Please try again!");
+            expect(renderBadPlayerMoveSpy).to.have.been.calledOnce;
         });
     });
 
     describe('renderRequestPlayerMove', () => {
-
-        describe('Called once', () => {
-            
-            it('Should be called once and set consoletext', () => {
-                let renderRequestPlayerMoveSpy = sinon.spy(sut, 'renderRequestPlayerMove');
-                sut.renderRequestPlayerMove();
-                let actual = sut._consoleText;
-                expect(actual).to.be.equal("Insert 0-8 to place game piece at chosen position on the board:");
-                expect(renderRequestPlayerMoveSpy).to.have.been.calledOnce;
-            });
-
+        it('Should be called once and set consoletext', () => {
+            let renderRequestPlayerMoveSpy = sinon.spy(sut, 'renderRequestPlayerMove');
+            sut.renderRequestPlayerMove();
+            let actual = sut._consoleText;
+            expect(actual).to.be.equal("Insert 0-8 to place game piece at chosen position on the board:");
+            expect(renderRequestPlayerMoveSpy).to.have.been.calledOnce;
         });
     });
     
     describe('renderRequestNameInput', () => {
-
-        describe('Called once', () => {
-            
-            it('Should be called once and set consoletext', () => {
-                let renderRequestNameInputSpy = sinon.spy(sut, 'renderRequestNameInput');
-                sut.renderRequestNameInput();
-                let actual = sut._consoleText;
-                expect(actual).to.be.equal("Insert nickname:");
-                expect(renderRequestNameInputSpy).to.have.been.calledOnce;
-            });
-
+        it('Should be called once and set consoletext', () => {
+            let renderRequestNameInputSpy = sinon.spy(sut, 'renderRequestNameInput');
+            sut.renderRequestNameInput();
+            let actual = sut._consoleText;
+            expect(actual).to.be.equal("Insert nickname:");
+            expect(renderRequestNameInputSpy).to.have.been.calledOnce;
         });
     });
     
