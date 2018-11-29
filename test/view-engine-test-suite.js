@@ -22,7 +22,7 @@ export function run() {
     afterEach(function(){
         this.consoleStub.restore();
     });
-/*
+
     describe('renderStartGame', () => {
         
         describe('Called once', () => {
@@ -76,7 +76,6 @@ export function run() {
 
         });
     });
-    
 
     describe('renderRequestPlayerMove', () => {
 
@@ -92,7 +91,6 @@ export function run() {
 
         });
     });
-    */
     
     describe('renderRequestNameInput', () => {
 

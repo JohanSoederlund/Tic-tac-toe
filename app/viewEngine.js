@@ -38,7 +38,8 @@ export default class ViewEngine {
     }
 
     renderRequestNameInput() {
-
+        this._consoleText = "Insert nickname:"; 
+        console.log("Insert nickname:");
     }
 
 }
