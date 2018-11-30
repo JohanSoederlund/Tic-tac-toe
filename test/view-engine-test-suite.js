@@ -5,7 +5,7 @@
 // Requires
 import chai from 'chai';
 import { expect } from 'chai';
-import { it, describe, before, after } from 'mocha';
+import { it, describe } from 'mocha';
 import * as sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 chai.use(sinonChai);

@@ -5,7 +5,7 @@
 // Requires
 
 import { expect } from 'chai';
-import { it, describe, before, after } from 'mocha';
+import { it, describe, before } from 'mocha';
 import * as sinon from 'sinon';
 
 import GameEngine from './../app/gameEngine';
@@ -124,25 +124,18 @@ export function run() {
                 expect(JSON.stringify(sut.gameBoard)).to.equal(JSON.stringify(expected));
                 done();
             });
-            //sut = new GameEngine();
         });
-/*
+
         describe('place gamePiece at out of range gameSquare', () => {
             
-            before((done) => {
-                sut.placeGamePiece(player1, [3, 0]);     
-                done();
-            });
-            
             it('should not update gameBoard, but throw error', (done) => {
-                expect(() => sut.startGame(player1, player2)).to.throw(RangeError);
+                expect(() => sut.placeGamePiece(player1, [3, 0])).to.throw(RangeError);
                 done();
             });
             sut = new GameEngine();
         });
-        */
+        
     });
-
     
     describe('calculateThreeInARow', () => {
 

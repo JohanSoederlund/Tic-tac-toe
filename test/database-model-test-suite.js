@@ -3,8 +3,7 @@
 // Requires
 import chai from 'chai';
 import { expect } from 'chai';
-import { it, describe, before, after } from 'mocha';
-import * as sinon from 'sinon';
+import { it, describe } from 'mocha';
 import sinonChai from 'sinon-chai';
 chai.use(sinonChai);
 

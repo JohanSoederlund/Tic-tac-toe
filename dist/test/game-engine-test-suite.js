@@ -125,23 +125,23 @@ function run() {
                 (0, _chai.expect)(JSON.stringify(sut.gameBoard)).to.equal(JSON.stringify(expected));
                 done();
             });
-            //sut = new GameEngine();
         });
-        /*
-                describe('place gamePiece at out of range gameSquare', () => {
-                    
-                    before((done) => {
-                        sut.placeGamePiece(player1, [3, 0]);     
-                        done();
-                    });
-                    
-                    it('should not update gameBoard, but throw error', (done) => {
-                        expect(() => sut.startGame(player1, player2)).to.throw(RangeError);
-                        done();
-                    });
-                    sut = new GameEngine();
-                });
-                */
+
+        (0, _mocha.describe)('place gamePiece at out of range gameSquare', function () {
+
+            (0, _mocha.before)(function (done) {
+                done();
+            });
+
+            (0, _mocha.it)('should not update gameBoard, but throw error', function (done) {
+                (0, _chai.expect)(function () {
+                    return sut.placeGamePiece(player1, [3, 0]);
+                }).to.throw(RangeError);
+                //expect(() => sut.startGame(player1, player2)).to.throw(RangeError);
+                done();
+            });
+            sut = new _gameEngine2.default();
+        });
     });
 
     (0, _mocha.describe)('calculateThreeInARow', function () {

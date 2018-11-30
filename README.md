@@ -15,7 +15,7 @@ A code-coverage library [nyc](https://www.npmjs.com/package/nyc/v/5.1.0) is used
 ## Installation
 1. Clone the repo
 2. run npm i
-3. compile in to javascript: npm start
+3. compile into classic javascript with [babel](https://www.npmjs.com/package/babel-cli): npm start
 4. run tests: run test
 
 If you want to use the application it follows the simple ruleset: [Tic-tac-toe](https://en.wikipedia.org/wiki/Tic-tac-toe).

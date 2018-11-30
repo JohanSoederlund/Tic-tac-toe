@@ -8,7 +8,7 @@
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "test": "nyc mocha --timeout 120000 dist/test/*.test.js"
   },
-  "keywords": [],
+  "keywords": ["TDD", "Unit test", "Game"],
   "author": "Johan Söderlund",
   "license": "MIT",
   "dependencies": {

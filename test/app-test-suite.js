@@ -3,13 +3,10 @@
  */
 
 // Requires
-
 import { expect } from 'chai';
-import { it, describe, before, after } from 'mocha';
+import { it, describe } from 'mocha';
 import * as sinon from 'sinon';
-
 import GameEngine from './../app/gameEngine';
-import Player from '../app/player.js';
 import ViewEngine from '../app/viewEngine.js';
 import App from '../app/app.js';
 let sut = new App();
