@@ -5,10 +5,10 @@ The aim of this project was to fully develop a simple game using [Test Driven De
 The process follow a RED-GREEN-REFACTOR pattern for every new module.
 
 ## Testing frameworks
-[Mocha](https://www.npmjs.com/package/mocha)
-[Sinon](https://www.npmjs.com/package/sinon)
-[Sinon-chai](https://www.npmjs.com/package/sinon-chai)
-[Chai](https://www.npmjs.com/package/chai)
+* [Mocha](https://www.npmjs.com/package/mocha)
+* [Sinon](https://www.npmjs.com/package/sinon)
+* [Sinon-chai](https://www.npmjs.com/package/sinon-chai)
+* [Chai](https://www.npmjs.com/package/chai)
 
 A code-coverage library [nyc](https://www.npmjs.com/package/nyc/v/5.1.0) is used for statement, branch, function and line-coverage [latest](https://raw.githubusercontent.com/JohanSoederlund/Tic-tac-toe/master/documents/Coverage%202018-11-29%2015-34-18.png).
 
