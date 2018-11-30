@@ -4,8 +4,7 @@
  * GameEngine class.
  */
 export default class GameEngine {
-
-	constructor() {
+    constructor() {
         this.roundNumber = 0;
         this.winner = "";
         this.players = [];
@@ -39,10 +38,9 @@ export default class GameEngine {
     placeGamePiece(player, placement) {
         if (typeof(player) !== "object" || placement.isArray === false) {
             throw new TypeError("player and placement must be of valid type");
-        } else if(0 > placement[0] > 2 || 0 > placement[1] > 2 ) {
+        } else if(0 > placement[0] || placement[0] > 2 || 0 > placement[1] || placement[1] > 2 ) {
             throw new RangeError("Placement must be in range [0, 0] to [2, 2]");
         }
-
         if (JSON.stringify(this.players[0]) === JSON.stringify(player)) {
             if (this._gameBoard[placement[0]][placement[1]] === " ") {
                 this._gameBoard[placement[0]][placement[1]] = player._gamePiece;
@@ -120,5 +118,4 @@ export default class GameEngine {
         this.winner = "";
         return game;
     }
-
 }

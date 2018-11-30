@@ -4,10 +4,10 @@
  * Player class.
  */
 export default class Player {
-	constructor(name, gamePiece) {
-        this._name = name;
-        this._gamePice = gamePiece;
-        this._isWinner = false;
+    constructor(name, gamePiece) {
+        this.name = name;
+        this.gamePiece = gamePiece;
+        this.isWinner = false;
     }
     
     get name() {
@@ -15,7 +15,7 @@ export default class Player {
     }
 
     get gamePiece() {
-        return this._gamePice;
+        return this._gamePiece;
     }
 
     get isWinner() {
@@ -41,7 +41,7 @@ export default class Player {
     set gamePiece(gamePiece) {
         
         if (typeof(gamePiece) === "string" && gamePiece.length === 1){
-            this._gamePice = gamePiece;
+            this._gamePiece = gamePiece;
         } else {
             throw new TypeError("gamePiece must be one character long");
         }

@@ -22,7 +22,9 @@ export default class App {
         let playerAddedSuccessfully = false;
         let index = 5;
         while(!playerAddedSuccessfully && index > 0) {
-            playerAddedSuccessfully = this.addPlayers(this.viewEngine.renderRequestNameInput());
+            let p1 = this.viewEngine.renderRequestNameInput();
+            let p2 = this.viewEngine.renderRequestNameInput();
+            playerAddedSuccessfully = this.addPlayers([p1, p2]);
             index--;
         }
         return playerAddedSuccessfully;
@@ -47,7 +49,28 @@ export default class App {
      * Request a move from one Player.
      */
     requestPlayerMove(player) {
-        this.viewEngine.renderRequestPlayerMove(player);
+        let playerMove = Number(this.viewEngine.renderRequestPlayerMove(player));
+        let pm = [];
+        switch (playerMove) {
+            case 0:
+            case 1:
+            case 2:
+                pm = [0, playerMove-3];
+                break;
+            case 3:
+            case 4:
+            case 5:
+            pm = [1, playerMove-3];
+                break;
+            case 6:
+            case 7:
+            case 8:
+            pm = [2, playerMove-6];
+                break;
+            default:
+                break;
+        }
+        return pm;
     }
 
     /**
@@ -79,7 +102,7 @@ export default class App {
         while(!this.checkGameOver()) {
             try {
                 this.viewEngine.renderGameBoard(this.gameEngine._gameBoard);
-                let playerMove = this.requestPlayerMove(this.gameEngine.players[index])
+                let playerMove = this.requestPlayerMove(this.gameEngine.players[index]);
                 this.gameEngine.placeGamePiece(this.gameEngine.players[index], playerMove);
                 if (index === 0) {
                     index = 1;

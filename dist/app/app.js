@@ -45,7 +45,9 @@ var App = function () {
             var playerAddedSuccessfully = false;
             var index = 5;
             while (!playerAddedSuccessfully && index > 0) {
-                playerAddedSuccessfully = this.addPlayers(this.viewEngine.renderRequestNameInput());
+                var p1 = this.viewEngine.renderRequestNameInput();
+                var p2 = this.viewEngine.renderRequestNameInput();
+                playerAddedSuccessfully = this.addPlayers([p1, p2]);
                 index--;
             }
             return playerAddedSuccessfully;
@@ -76,7 +78,28 @@ var App = function () {
     }, {
         key: 'requestPlayerMove',
         value: function requestPlayerMove(player) {
-            this.viewEngine.renderRequestPlayerMove(player);
+            var playerMove = Number(this.viewEngine.renderRequestPlayerMove(player));
+            var pm = [];
+            switch (playerMove) {
+                case 0:
+                case 1:
+                case 2:
+                    pm = [0, playerMove - 3];
+                    break;
+                case 3:
+                case 4:
+                case 5:
+                    pm = [1, playerMove - 3];
+                    break;
+                case 6:
+                case 7:
+                case 8:
+                    pm = [2, playerMove - 6];
+                    break;
+                default:
+                    break;
+            }
+            return pm;
         }
 
         /**

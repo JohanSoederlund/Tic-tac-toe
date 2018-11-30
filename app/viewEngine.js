@@ -9,7 +9,7 @@ var readline = require('readline-sync');
  */
 export default class ViewEngine {
 
-	constructor() {
+    constructor() {
         this._consoleText = "";
         this._readline = readline;
     }

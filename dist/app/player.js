@@ -16,9 +16,9 @@ var Player = function () {
     function Player(name, gamePiece) {
         _classCallCheck(this, Player);
 
-        this._name = name;
-        this._gamePice = gamePiece;
-        this._isWinner = false;
+        this.name = name;
+        this.gamePiece = gamePiece;
+        this.isWinner = false;
     }
 
     _createClass(Player, [{
@@ -48,12 +48,12 @@ var Player = function () {
     }, {
         key: "gamePiece",
         get: function get() {
-            return this._gamePice;
+            return this._gamePiece;
         },
         set: function set(gamePiece) {
 
             if (typeof gamePiece === "string" && gamePiece.length === 1) {
-                this._gamePice = gamePiece;
+                this._gamePiece = gamePiece;
             } else {
                 throw new TypeError("gamePiece must be one character long");
             }
